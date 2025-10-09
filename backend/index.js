@@ -15,7 +15,16 @@ const PORT = process.env.PORT;
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(session({ secret: "mysecret", resave: true, saveUninitialized: true }));
+app.use(session({
+    secret: "mysecret",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None"
+    }
+}));
 app.use(requestIp.mw());
 
 app.use(cors({

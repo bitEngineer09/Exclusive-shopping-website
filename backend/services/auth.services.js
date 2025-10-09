@@ -77,14 +77,14 @@ export const authenticate = async (req, res, loggedInUser, registeredUser) => {
 
     res.cookie("access_token", accessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
     });
 
     res.cookie("refresh_token", refreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
+        secure: true,
+        sameSite: "None",
     });
 }
 //?--------------------------------------------------------------------
