@@ -19,7 +19,7 @@ app.use(session({ secret: "mysecret", resave: true, saveUninitialized: true }));
 app.use(requestIp.mw());
 
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: ["https://exclusive-shopping-website-frontend.onrender.com", "http://localhost:5174"],
     credentials: true,
 }))
 
