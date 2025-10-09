@@ -8,6 +8,9 @@ import { GrCart } from "react-icons/gr";
 import { TbLogout } from "react-icons/tb";
 import { BiLogIn } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { FaRegHeart } from "react-icons/fa";
+
+
 
 const NavSmallerPhones = ({
     handleNavSelection,
@@ -53,8 +56,12 @@ const NavSmallerPhones = ({
 
             <div
                 onClick={() => {
-                    handleNavSelection("profile")
-                    navigate("/profile")
+                    handleNavSelection("profile");
+                    if (loggedinUserData) {
+                        navigate("/profile");
+                    } else {
+                        navigate("/auth");
+                    }
                 }}
                 className={`
                     text-[1rem] sm:text-[1.1rem] font-medium
@@ -63,7 +70,7 @@ const NavSmallerPhones = ({
                     flex items-center justify-center
                     cursor-pointer hover:bg-white/5 active:bg-white/10
                     transition-all duration-200
-                    ${navSelection === "orders" ? "bg-white/10 text-(--color-primary)" : ""}
+                    ${navSelection === "profile" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
                 <div className='flex items-center justify-center gap-4'>
                     <div className="profile flex flex-col items-center justify-between">                               {
@@ -138,8 +145,12 @@ const NavSmallerPhones = ({
 
             <div
                 onClick={() => {
-                    handleNavSelection("cart")
-                    navigate("/cart")
+                    handleNavSelection("cart");
+                    if (loggedinUserData) {
+                        navigate("/cart");
+                    } else {
+                        navigate("/auth");
+                    }
                 }}
                 className={`
                     text-[1rem] sm:text-[1.1rem] font-medium
@@ -155,8 +166,33 @@ const NavSmallerPhones = ({
 
             <div
                 onClick={() => {
-                    handleNavSelection("orders")
-                    navigate("/myorder")
+                    handleNavSelection("wishlist");
+                    if (loggedinUserData) {
+                        navigate("/wishlist");
+                    } else {
+                        navigate("/auth");
+                    }
+                }}
+                className={`
+                    text-[1rem] sm:text-[1.1rem] font-medium
+                    border-b-[1px] border-zinc-700 text-(--text-secondary) 
+                    w-full py-3 sm:py-4
+                    flex items-center justify-center
+                    cursor-pointer hover:bg-white/5 active:bg-white/10
+                    transition-all duration-200
+                    ${navSelection === "wishlist" ? "bg-white/10 text-(--color-primary)" : ""}
+                `}>
+                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Wishlist <FaRegHeart className='text-xl' /> </p>
+            </div>
+
+            <div
+                onClick={() => {
+                    handleNavSelection("orders");
+                    if (loggedinUserData) {
+                        navigate("/myorder");
+                    } else {
+                        navigate("/auth");
+                    }
                 }}
                 className={`
                     text-[1rem] sm:text-[1.1rem] font-medium
@@ -205,7 +241,7 @@ const NavSmallerPhones = ({
                             transition-all duration-200
                             ${navSelection === "logout" ? "bg-red-500/20 text-red-400" : ""}
                         `}>
-                            <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Log out <TbLogout className='text-xl' /></p>
+                        <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Log out <TbLogout className='text-xl' /></p>
                     </div>
             }
         </div>
