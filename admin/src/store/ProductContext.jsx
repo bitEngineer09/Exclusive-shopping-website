@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react'
-import { addProduct, deleteProduct, getAllProducts } from '../../services/product.services';
+import { addProduct, deleteProduct, getAllProducts } from '../../../frontend/src/services/adminProduct.services';
 
 export const productDataContext = createContext();
 const ProductContext = ({ children }) => {

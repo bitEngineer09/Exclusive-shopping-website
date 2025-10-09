@@ -1,4 +1,4 @@
-import { serverURL } from "../src/config/server";
+import { serverURL } from "../../../admin/src/config/server";
 import axios from 'axios';
 
 // ADD PRODUCT SERVICE

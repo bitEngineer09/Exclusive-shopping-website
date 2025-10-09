@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { getAllProducts } from '../../../admin/services/product.services';
+import { getAllProducts } from '../services/adminProduct.services';
 import { addReview, addToWishList, getProductById, getWishListData } from '../services/product.services';
 
 
