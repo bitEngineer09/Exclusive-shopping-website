@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 320px;
+  /* tiny phones  iPhone SE → 320px wide */
+
+  --breakpoint-sm: 480px;
+  /* Normal phones (≈360–480px width) Most Android phones (Pixel 4a, OnePlus, Samsung Galaxy S series) → 360px–412px */
+
+  --breakpoint-md: 768px;
+  /* tablets */
+
+  --breakpoint-lg: 1024px;
+  /* laptops */
+
+  --breakpoint-xl: 1280px;
+  /* desktops */
+
+  --breakpoint-2xl: 1536px;
+  /* big desktops */
+
+
+  --color-primary: #EC003F;
+  --bg-primary: #E3E6E6;
+  --bg-secondary: #09090B;
+  --bg-color: #09090B;
+  --text-primary: #000000;
+  --text-secondary: #ffffff;
+  --bg-footer: #09090B;
+  /* bg-zinc-950 */
+
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  background-color: #09090B;
+}
+
+/* react-toastify success icon ko white karne ke liye */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: white !important;
+  color: white !important;
+}
+
+.searchInput::placeholder {
+  color: white;
+}
+
+.searchInputTablet::placeholder {
+  color: white;
+}
+
+.shopByCategory::-webkit-scrollbar {
+  display: none;
+}
+
+.registerImage {
+  box-shadow: rgba(100, 100, 100, 0.19) 0px 10px 20px, rgba(122, 122, 122, 0.23) 0px 6px 6px;
+}
+
+.name::placeholder {
+  color: #ffffff;
+}
+
+.email::placeholder {
+  color: #ffffff;
+}
+
+.password::placeholder {
+  color: #ffffff;
+}
+
+.collectionCard {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media (min-width: 1281px) {
+  .authContainer {
+    background-image: url("https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+@media (max-width: 1280px) {
+  .authContainer {
+    background-image: url("https://res.cloudinary.com/dapak9w0a/image/upload/v1759757505/loginModel_ut6od3.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
+/* 
+.scrollbar-hide {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+} */
+
+.scrollbar-hide::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #A50036;
+}
