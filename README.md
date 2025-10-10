@@ -1,88 +1,72 @@
-🛍️ Exclusive E-Commerce Website (MERN Stack)
+🛍️ Exclusive Shopping Website
 
-A full-stack e-commerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). This project includes complete user authentication, product browsing, cart management, order placement, and more. Currently in progress — with a few final features (like admin dashboard and payment gateway) under development.
+An innovative Full Stack E-Commerce Platform built with the MERN Stack (MongoDB, Express.js, React.js, Node.js), featuring a Voice Navigation Bot for hands-free browsing. This project combines modern web technologies with an AI-driven user experience to create a next-generation online shopping environment.
 
-🚀 Features
-✅ User Signup & Login (JWT Authentication)
+🧠 Intelligent Voice Navigation
 
-✅ Product Listing & Details Page
+Integrated voice bot that allows users to navigate through different pages and sections using spoken commands.
+Commands like “Go to cart”, “Show products”, or “Open profile” make browsing smooth and futuristic.
 
-✅ Add to Cart / Remove from Cart
+🛒 Shopping Features
 
-✅ Place Order (Cash on Delivery)
+Product Listing: Dynamic product cards with images, details, and price.
 
-✅ Order History Tracking
+Search & Filter: Find products quickly based on category or keyword.
 
-✅ Responsive UI for desktop & mobile
+Cart & Checkout: Add, remove, or update cart items seamlessly.
 
-🔄 Final Features in Progress:
-
-Product Search & Filtering
-
-Admin Panel for Product Management
-
-Online Payment Integration
-
-Here are some screenshots...
-<img width="1918" height="998" alt="Screenshot 2025-10-07 173550" src="https://github.com/user-attachments/assets/a3fc8daf-1bf6-48ae-9fcc-93093bd22ef7" />
+Authentication System: Secure user registration and login using JWT.
 
 
-<img width="1919" height="995" alt="Screenshot 2025-10-07 173620" src="https://github.com/user-attachments/assets/5cad20b1-4c98-4b70-a9d8-71365ad9d8f1" />
+💻 Tech Highlights
+
+Frontend: React.js with Context API for state management.
+
+Backend: Node.js & Express.js for robust server handling.
+
+Database: MongoDB for scalable and flexible data storage.
+
+Deployment: Hosted using Render (backend) and Vercel (frontend).
+
+Authentication:	JWT, argon
+
+Deployment:	Render (Server) 
 
 
+🖼️ ScreenShots
+<img width="1916" height="998" alt="Screenshot 2025-10-10 110519" src="https://github.com/user-attachments/assets/ad45f58e-6e89-44a4-bac0-9f210e81e87b" /> </br>
 
+<img width="1919" height="998" alt="Screenshot 2025-10-10 110546" src="https://github.com/user-attachments/assets/805318f8-2f30-4a5e-b2b5-aefee3c55292" /> </br>
 
-<img width="1919" height="998" alt="Screenshot 2025-10-07 173633" src="https://github.com/user-attachments/assets/8d801fcf-accf-46df-9cb7-6672a53c527d" />
+<img width="1919" height="997" alt="Screenshot 2025-10-10 110610" src="https://github.com/user-attachments/assets/bafae36e-9203-4b38-9bb0-69c432f3f5a4" /> </br>
 
+<img width="1919" height="997" alt="Screenshot 2025-10-10 110630" src="https://github.com/user-attachments/assets/1303a6bb-27ce-4d77-8b34-c06c350b2d0c" /> </br>
 
-<img width="1919" height="997" alt="Screenshot 2025-10-07 174322" src="https://github.com/user-attachments/assets/7fb077b2-03f2-4c23-bbea-dbbe9de133a5" />
+<img width="1919" height="997" alt="Screenshot 2025-10-10 110720" src="https://github.com/user-attachments/assets/2e20fb15-6175-4243-bbb1-1a8e565b20c9" /> </br>
 
+<img width="1919" height="996" alt="Screenshot 2025-10-10 110738" src="https://github.com/user-attachments/assets/26536fbe-d02e-470d-8136-a080c97e549b" /> </br>
 
-<img width="1919" height="998" alt="Screenshot 2025-10-07 173713" src="https://github.com/user-attachments/assets/b85c620d-1b6d-4b0b-a941-3380b7b765d9" />
+<img width="1919" height="997" alt="Screenshot 2025-10-10 110800" src="https://github.com/user-attachments/assets/0b2bb999-48b9-4ab2-b520-c1c10f10862a" /> </br>
 
+<img width="1919" height="997" alt="Screenshot 2025-10-10 110944" src="https://github.com/user-attachments/assets/3e6d21d5-2cf7-4ab8-bf81-868eb4f05fb3" /> </br>
 
-<img width="1919" height="997" alt="Screenshot 2025-10-07 173732" src="https://github.com/user-attachments/assets/3e265059-6816-496d-9fd9-0b80fc1838a5" />
+<img width="1919" height="996" alt="Screenshot 2025-10-10 110817" src="https://github.com/user-attachments/assets/89a099a4-f3d1-4ee2-b773-51249b224ad2" /> </br>
 
+<img width="1919" height="996" alt="Screenshot 2025-10-10 110901" src="https://github.com/user-attachments/assets/8f90f252-52ed-4ec7-bc03-f3200f03c334" /> </br>
 
-<img width="1919" height="997" alt="Screenshot 2025-10-07 173754" src="https://github.com/user-attachments/assets/3cb6b67b-396c-4fb5-8c6a-007c8c01a328" />
+<img width="1919" height="998" alt="Screenshot 2025-10-10 110915" src="https://github.com/user-attachments/assets/abcdbcea-ee00-4712-9539-f069689c4913" /> </br>
 
+<img width="1919" height="994" alt="Screenshot 2025-10-10 110932" src="https://github.com/user-attachments/assets/6cbfcf73-5c4a-4cfc-bbc1-30a076543eab" /> </br>
 
-<img width="1918" height="996" alt="Screenshot 2025-10-07 173838" src="https://github.com/user-attachments/assets/e0bfc1d3-e60b-4f0e-bf2e-6a829fe38a7d" />
+<img width="1919" height="996" alt="Screenshot 2025-10-10 111000" src="https://github.com/user-attachments/assets/0ed6f2f1-2faf-4524-9005-da369dc49343" /> </br>
 
+<img width="1919" height="996" alt="Screenshot 2025-10-10 111021" src="https://github.com/user-attachments/assets/92aeaa47-86c4-473b-96ac-3cc0bdd94246" /> </br>
 
-<img width="1916" height="997" alt="Screenshot 2025-10-07 173850" src="https://github.com/user-attachments/assets/cf30c323-480a-4e94-853a-654b95914c5e" />
+<img width="1919" height="997" alt="Screenshot 2025-10-10 111129" src="https://github.com/user-attachments/assets/083069e2-8d23-4c11-9e70-d8f9e758aac6" /> </br>
 
+<img width="1919" height="997" alt="Screenshot 2025-10-10 111319" src="https://github.com/user-attachments/assets/48e103fd-94b6-48fd-b30d-f0495f4da95e" /> </br>
 
-<img width="1919" height="998" alt="Screenshot 2025-10-07 173858" src="https://github.com/user-attachments/assets/075c896e-0ee0-44d3-a889-47482c958259" />
-
-
-<img width="1919" height="998" alt="Screenshot 2025-10-07 173944" src="https://github.com/user-attachments/assets/95c29ac2-c876-4155-bb7f-dc78d7ddb9ef" />
-
-
-<img width="1919" height="998" alt="Screenshot 2025-10-07 174032" src="https://github.com/user-attachments/assets/ccd110b5-5142-4c39-904e-64ed0cec3bd2" />
-
-
-<img width="1919" height="997" alt="Screenshot 2025-10-07 174046" src="https://github.com/user-attachments/assets/3d933d16-63c5-4e77-a9eb-2308eddc32cf" />
-
-
-<img width="1919" height="996" alt="Screenshot 2025-10-07 174107" src="https://github.com/user-attachments/assets/381ea45b-376c-47e9-9601-ecd1a878402c" />
-
-
-<img width="1919" height="996" alt="Screenshot 2025-10-07 174118" src="https://github.com/user-attachments/assets/34e6bcc9-0738-425c-b929-3b9cc19fe638" />
-
-
-ADMIN PANEL...
-<img width="1919" height="997" alt="Screenshot 2025-09-24 224513" src="https://github.com/user-attachments/assets/617ede47-73dd-4c2a-a31a-2d0f4e385e40" />
-
-<img width="1919" height="998" alt="Screenshot 2025-09-24 224530" src="https://github.com/user-attachments/assets/a6fe4abf-4808-4b32-ba64-e431207daca8" />
-
-<img width="1916" height="998" alt="Screenshot 2025-09-24 224614" src="https://github.com/user-attachments/assets/0eb0a0fb-99de-4fc7-b452-5d5e9c3b6d6a" />
-
-
-
-
-
-
+<img width="1919" height="996" alt="Screenshot 2025-10-10 111334" src="https://github.com/user-attachments/assets/5f31e361-1c57-405e-af67-cec1bce1c190" /> </br>
 
 
 
