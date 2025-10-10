@@ -32,7 +32,7 @@ const LatestCollections = () => {
     return (
         <>
     {/* SECTION HEADING */}
-    <div className='mb-8 md:mb-12 lg:mb-16'>
+    <div className='mb-3 md:mb-12 lg:mb-16'>
         <h2 className='
             text-2xl sm:text-3xl md:text-4xl lg:text-5xl
             font-semibold 

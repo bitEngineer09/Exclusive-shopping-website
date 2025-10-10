@@ -35,7 +35,7 @@ const ModelSlider = () => {
       className="
         relative 
         w-full 
-        h-[19rem] sm:h-[22rem] md:h-[28rem] lg:h-[40rem] 2xl:h-[51.5rem]
+        h-[17rem] sm:h-[22rem] md:h-[28rem] lg:h-[40rem] 2xl:h-[51.5rem]
         max-h-[56rem]
         overflow-hidden 
         mx-auto
@@ -43,7 +43,7 @@ const ModelSlider = () => {
     >
       {/* Images */}
       <div
-        className="flex transition-transform ease-in-out duration-700"
+        className="flex transition-transform ease-in-out duration-700 w-full h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {models.map((model, index) => (
@@ -56,7 +56,7 @@ const ModelSlider = () => {
               effect="blur"
               alt=""
               className="
-                w-full h-full
+                w-full h-[17rem] sm:h-full
                 object-cover 
               "/>
           </div>

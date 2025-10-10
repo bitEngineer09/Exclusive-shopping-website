@@ -10,8 +10,8 @@ const Banner = () => {
         text-(--text-secondary)
         font-semibold 
         text-center
-        mt-2 sm:mt-3 md:mt-5 lg:mt-7
-        mb-6 sm:mb-8 md:mb-10 lg:mb-12
+        mt-3 sm:mt-3 md:mt-5 lg:mt-7
+        mb-3 sm:mb-8 md:mb-10 lg:mb-12
       '>
         Our <span className='text-rose-700'>Gallery</span>
       </h2>
