@@ -129,10 +129,10 @@ const Collections = () => {
                   <h1
                     className='
                 text-white
-                my-8
+                my-3 sm:my-5 xl:my-8
                 flex items-center
-                gap-2 md:gap-4 text-2xl 
-                sm:text-3xl lg:text-4xl xl:text-5xl
+                gap-2 md:gap-4
+                text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold
                 '>
                     All Collections
                     <GiClothes className='text-rose-700' />
@@ -151,7 +151,7 @@ const Collections = () => {
                 gap-3 md:gap-4 lg:gap-5 xl:gap-6
             '>
                     {
-                      filteredProducts.map((product, index) => {
+                      filteredProducts?.map((product, index) => {
                         return (
                           <div
                             key={product._id || index}

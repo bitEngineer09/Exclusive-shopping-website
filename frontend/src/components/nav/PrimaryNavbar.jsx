@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { authDataContext } from '../../store/AuthContext';
@@ -35,9 +35,22 @@ const PrimaryNavbar = () => {
         setNavSelection(navItem);
     };
 
+    // Prevent body scroll when mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
 
     return (
-        <>
+        <div>
             {/* NAV LINKS LAPTOPS / DESKTOPS */}
             <NavDesktop
                 handleNavSelection={handleNavSelection}
@@ -52,7 +65,7 @@ const PrimaryNavbar = () => {
             />
 
             {/* NAV LINKS MOBILE */}
-            <div className='relative w-full h-[4rem] sm:h-[4.3rem] flex xl:hidden items-center bg-black px-3 sm:px-4'>
+            <div className='relative w-full h-[4rem] sm:h-[4.3rem] flex xl:hidden items-center bg-black px-3 sm:px-4 z-50'>
                 <div className='w-full flex items-center justify-between relative text-white'>
                     {/* LOGO */}
                     <div className='flex items-center justify-between w-43 sm:w-52 relative'>
@@ -95,11 +108,20 @@ const PrimaryNavbar = () => {
                         }
                     </div>
                 </div>
+            </div>
 
-                {
-                    isOpen ?
-                        <div className='absolute top-full left-0 w-full z-50'>
-                            {/* FOR SMALLER PHONES */}
+            {/* Mobile Menu Overlay */}
+            {
+                isOpen && (
+                    <div className='fixed inset-0 z-40 xl:hidden'>
+                        {/* Backdrop */}
+                        <div 
+                            onClick={() => setIsOpen(false)}
+                            className='absolute inset-0 '
+                        />
+                        
+                        {/* Menu Panel */}
+                        <div className='absolute top-[4rem] sm:top-[4.3rem] right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.3rem)] w-[20rem] overflow-y-auto'>
                             <NavSmallerPhones
                                 handleNavSelection={handleNavSelection}
                                 loggedinUserData={loggedinUserData}
@@ -109,12 +131,12 @@ const PrimaryNavbar = () => {
                                 navigate={navigate}
                             />
                         </div>
-                        : null
-                }
-            </div>
+                    </div>
+                )
+            }
 
             <NavBanner />
-        </>
+        </div>
 
     )
 }

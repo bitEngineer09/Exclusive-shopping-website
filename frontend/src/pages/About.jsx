@@ -35,12 +35,12 @@ const About = () => {
   ];
 
   return (
-    <div className="min-h-screen text-white flex flex-col">
+    <div className="min-h-screen flex flex-col">
       {/* Navigation */}
       <PrimaryNavbar />
 
       {/* Hero Section */}
-      <section className="relative my-8 px-4 sm:px-6 lg:px-8">
+      <section className="relative my-8 px-4 sm:px-6 lg:px-8 text-white">
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="flex items-center justify-center gap-2 md:gap-4 text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold mb-4">
             About exclusive{" "}
@@ -55,7 +55,7 @@ const About = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="my-6 sm:my-10 py-8 sm:py-12 bg-stone-900 px-4 sm:px-6">
+      <section className="my-6 sm:my-10 py-8 sm:py-12 bg-stone-900 px-4 sm:px-6 text-white">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
@@ -76,7 +76,7 @@ const About = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="px-4 sm:px-6 lg:px-10 py-10 lg:py-20">
+      <section className="px-4 sm:px-6 lg:px-10 py-10 lg:py-20 text-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left */}
@@ -97,7 +97,7 @@ const About = () => {
             </div>
 
             {/* Right */}
-            <div className="relative">
+            <div className="relative text-white">
               <div className="bg-slate-900 rounded-xl lg:rounded-3xl p-6 sm:p-8">
                 <div className="flex items-center justify-center h-48 sm:h-56 lg:h-64">
                   <div className="text-center">
@@ -114,7 +114,7 @@ const About = () => {
 
       
       {/* Features Section */}
-      <section className="py-10 lg:py-20 px-4 sm:px-6">
+      <section className="py-10 lg:py-20 px-4 sm:px-6 text-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
@@ -141,24 +141,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      {/* <section className="py-10 lg:py-20 px-4 sm:px-6 bg-zinc-900">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4">
-            Ready to Experience Exclusive?
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg mb-6">
-            Join thousands of satisfied customers and discover what makes us different.
-          </p>
-          <button
-            onClick={() => navigate('/collections')}
-            className="bg-white cursor-pointer text-pink-600 font-bold py-3 px-8 sm:py-4 sm:px-12 rounded-full text-sm sm:text-base md:text-lg hover:scale-105 transition-transform"
-          >
-            Start Shopping Now
-          </button>
-        </div>
-      </section> */}
 
       {/* Footer */}
       <Footer />
