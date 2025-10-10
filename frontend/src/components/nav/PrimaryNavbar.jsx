@@ -8,6 +8,9 @@ import { BsFillBagHeartFill } from "react-icons/bs";
 import NavSmallerPhones from './NavSmallerPhones';
 import NavDesktop from './NavDesktop';
 import NavBanner from './NavBanner';
+import { CgProfile } from "react-icons/cg";
+
+
 
 const PrimaryNavbar = () => {
 
@@ -49,36 +52,48 @@ const PrimaryNavbar = () => {
             />
 
             {/* NAV LINKS MOBILE */}
-            <div
-                className='
-                    relative
-                    w-full h-[3.5rem] sm:h-[4rem]
-                    flex xl:hidden items-center
-                    bg-black
-                    px-3 sm:px-4
-                '>
-                <div className='w-full flex items-center justify-between relative'>
-                    <div className='flex items-center relative'>
-                        <p className='text-[1.3rem] sm:text-[1.6rem] font-medium cursor-pointer text-(--text-secondary)'>
+            <div className='relative w-full h-[4rem] sm:h-[4.3rem] flex xl:hidden items-center bg-black px-3 sm:px-4'>
+                <div className='w-full flex items-center justify-between relative text-white'>
+                    {/* LOGO */}
+                    <div className='flex items-center justify-between w-43 sm:w-52 relative'>
+                        <p
+                            onClick={() => navigate("/")}
+                            className='text-3xl sm:text-4xl font-medium cursor-pointer text-(--text-secondary)'>
                             exclusive
                         </p>
-                        <BsFillBagHeartFill
-                            className='
-                                text-[1.2rem] sm:text-[1.5rem] text-(--color-primary)
-                                absolute left-[6.8rem] sm:left-[8.1rem] top-[0.2rem] sm:top-[0.3rem]
-                            '/>
+                        <BsFillBagHeartFill className='text-[1.5rem] sm:text-[1.7rem] text-(--color-primary) ml-2' />
                     </div>
-                    {
-                        !isOpen
-                            ? <GiHamburgerMenu
-                                onClick={() => setIsOpen(true)}
-                                className='text-[1.3rem] sm:text-[1.5rem] text-(--text-secondary) cursor-pointer hover:text-(--color-primary) transition-colors' />
-                            :
-                            <RxCross2
-                                onClick={() => setIsOpen(false)}
-                                className='text-[1.3rem] sm:text-[1.5rem] text-(--text-secondary) cursor-pointer hover:text-(--color-primary) transition-colors'
-                            />
-                    }
+
+                    {/* HAMBURGER */}
+                    <div className='flex items-center justify-between gap-3 sm:gap-4'>
+                        {
+                            loggedinUserData ?
+                                (
+                                    <div
+                                        onClick={() => navigate("/profile")}
+                                        className='select-none cursor-pointer text-white text-xl sm:text-2xl font-medium bg-pink-700 w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 flex items-center justify-center rounded-full'>
+                                        {loggedinUserData?.name?.charAt(0)?.toUpperCase()}
+                                    </div>
+                                )
+                                :
+                                (
+                                    <CgProfile
+                                        onClick={() => navigate("/login")}
+                                        className='text-3xl sm:text-4xl text-rose-600 hover:scale-110 duration-150 ease-in-out hover:text-zinc-400 cursor-pointer' />
+                                )
+                        }
+                        {
+                            !isOpen
+                                ? <GiHamburgerMenu
+                                    onClick={() => setIsOpen(true)}
+                                    className='text-2xl sm:text-3xl text-(--text-secondary) cursor-pointer hover:text-(--color-primary) transition-colors' />
+                                :
+                                <RxCross2
+                                    onClick={() => setIsOpen(false)}
+                                    className='text-2xl sm:text-3xl text-(--text-secondary) cursor-pointer hover:text-(--color-primary) transition-colors'
+                                />
+                        }
+                    </div>
                 </div>
 
                 {

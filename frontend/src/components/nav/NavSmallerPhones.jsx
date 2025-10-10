@@ -54,7 +54,7 @@ const NavSmallerPhones = ({
                     '/>
             </div>
 
-            <div
+            {/* <div
                 onClick={() => {
                     handleNavSelection("profile");
                     if (loggedinUserData) {
@@ -90,7 +90,7 @@ const NavSmallerPhones = ({
                     <p>Profile</p>
                 </div>
 
-            </div>
+            </div> */}
 
             <div
                 onClick={() => {
