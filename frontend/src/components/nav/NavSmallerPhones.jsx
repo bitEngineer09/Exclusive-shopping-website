@@ -8,7 +8,7 @@ import { GrCart } from "react-icons/gr";
 import { TbLogout } from "react-icons/tb";
 import { BiLogIn } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
-
+import { GiClothes } from "react-icons/gi";
 
 
 const NavSmallerPhones = ({
@@ -23,7 +23,7 @@ const NavSmallerPhones = ({
 
 
     return (
-        <div className='w-full h-full flex flex-col backdrop-blur-2xl bg-black/50 border-l-2 border-zinc-600'>
+        <div className='w-full h-full flex flex-col backdrop-blur-2xl bg-black/70 border-l-2 border-zinc-600'>
 
             {/* NAV SEARCH */}
             <div className='relative w-full border-b-[2px] border-zinc-700 py-3 px-4'>
@@ -50,7 +50,7 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "home" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Home <IoHomeOutline className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Home <IoHomeOutline className='text-xl' /> </p>
             </div>
 
             <div
@@ -67,7 +67,7 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "about" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>About <LuBookHeart className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>About <LuBookHeart className='text-xl' /> </p>
             </div>
 
             <div
@@ -84,7 +84,24 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "contact" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Contact <FaHeadphones className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Contact <FaHeadphones className='text-xl' /> </p>
+            </div>
+
+            <div
+                onClick={() => {
+                    handleNavSelection("collections")
+                    navigate("/collections")
+                }}
+                className={`
+                    text-[1rem] sm:text-[1.1rem] font-medium
+                    border-b-[1px] border-zinc-700 text-(--text-secondary) 
+                    w-full py-3 sm:py-4
+                    flex items-center justify-center
+                    cursor-pointer hover:bg-white/5 active:bg-white/10
+                    transition-all duration-200
+                    ${navSelection === "collections" ? "bg-white/10 text-(--color-primary)" : ""}
+                `}>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Collections <GiClothes className='text-xl' /> </p>
             </div>
 
             <div
@@ -105,7 +122,7 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "cart" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Cart <GrCart className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Cart <GrCart className='text-xl' /> </p>
             </div>
 
             <div
@@ -126,7 +143,7 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "wishlist" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Wishlist <FaRegHeart className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Wishlist <FaRegHeart className='text-xl' /> </p>
             </div>
 
             <div
@@ -147,7 +164,7 @@ const NavSmallerPhones = ({
                     transition-all duration-200
                     ${navSelection === "orders" ? "bg-white/10 text-(--color-primary)" : ""}
                 `}>
-                <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Orders <MdCurrencyRupee className='text-xl' /> </p>
+                <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Orders <MdCurrencyRupee className='text-xl' /> </p>
             </div>
 
 
@@ -167,7 +184,7 @@ const NavSmallerPhones = ({
                             transition-all duration-200
                             ${navSelection === "login" ? "bg-white/10 text-(--color-primary)" : ""}
                         `}>
-                        <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Log in <BiLogIn className='text-xl' /></p>
+                        <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Log in <BiLogIn className='text-xl' /></p>
                     </div> :
 
                     <div
@@ -185,7 +202,7 @@ const NavSmallerPhones = ({
                             transition-all duration-200
                             ${navSelection === "logout" ? "bg-red-500/20 text-red-400" : ""}
                         `}>
-                        <p className='flex items-center w-25 sm:w-30 justify-between gap-5'>Log out <TbLogout className='text-xl' /></p>
+                        <p className='flex items-center w-34 sm:w-35 justify-between gap-5 tracking-w font-medium'>Log out <TbLogout className='text-xl' /></p>
                     </div>
             }
         </div>

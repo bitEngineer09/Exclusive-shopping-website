@@ -121,7 +121,7 @@ const PrimaryNavbar = () => {
                         />
                         
                         {/* Menu Panel */}
-                        <div className='absolute top-[4rem] sm:top-[4.3rem] right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.3rem)] w-[20rem] overflow-y-auto'>
+                        <div className='absolute top-[4rem] sm:top-[4.3rem] right-0 h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.3rem)] w-[17rem] sm:w-[20rem] overflow-y-auto'>
                             <NavSmallerPhones
                                 handleNavSelection={handleNavSelection}
                                 loggedinUserData={loggedinUserData}
