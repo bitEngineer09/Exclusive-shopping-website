@@ -78,19 +78,22 @@ body {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-@media (min-width: 1281px) {
-  .authContainer {
-    background-image: url("https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #3f3f46 inset !important;
+  /* Match bg-zinc-700 */
+  -webkit-text-fill-color: white !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 768px) {
   .authContainer {
-    background-image: url("https://res.cloudinary.com/dapak9w0a/image/upload/v1759757505/loginModel_ut6od3.webp");
+    background-image: url("https://res.cloudinary.com/dapak9w0a/image/upload/v1760252436/pexels-dreamer-2149502243-30649518_wmrxps.webp");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
   }
 }
 

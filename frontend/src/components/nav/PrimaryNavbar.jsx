@@ -135,7 +135,9 @@ const PrimaryNavbar = () => {
                 )
             }
 
-            <NavBanner />
+            {
+                currentPath !== "/auth" && <NavBanner />
+            }
         </div>
 
     )

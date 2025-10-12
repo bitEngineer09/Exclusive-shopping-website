@@ -3,9 +3,10 @@ import PrimaryNavbar from '../components/nav/PrimaryNavbar';
 import google from '../assets/googleBlack.png';
 import { authDataContext } from '../store/AuthContext';
 import { useNavigate } from 'react-router-dom';
-// import { toast } from 'react-toastify';
 import { Ring2 } from 'ldrs/react';
 import 'ldrs/react/Ring2.css';
+import GridMotion from '../reactBits/GridMotion/GridMotion';
+import Footer from '../components/Footer/Footer';
 
 const Register = () => {
 
@@ -31,14 +32,6 @@ const Register = () => {
     googleSignup, googleLogin
   } = useContext(authDataContext);
 
-  // TOAST
-  // const handleToast = () => {
-  //   toast.success(`${!authType ? "Logged In" : "Registered"}`, {
-  //     position: "top-right",
-  //     autoClose: 3000,
-  //   })
-  // }
-
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,70 +56,79 @@ const Register = () => {
 
       <div
         className="
+          relative
           registerContainer
           w-full
           flex items-center justify-center
           min-h-[calc(100vh-5rem)]
-          px-5
+          px-6 sm:px-9
           ">
-          {/* FORM */}
-          <div
-            className='
-              border-3 border-rose-800
-              bg-black/90
+
+        {/* GRID MOTION */}
+        <div className='hidden md:block absolute top-0'>
+          <GridMotion />
+        </div>
+
+        {/* FORM */}
+        <div
+          className='
+              z-20
+              border-5 border-black
+              backdrop-blur-xl
               rounded-xl md:rounded-2xl
-              p-6 sm:p-8 md:p-10 lg:p-8 xl:p-10
-              w-[40rem]
-              
-              flex flex-col justify-around
+              p-6 sm:p-8 md:p-10
+              w-[30rem] md:w-[37rem]
+              flex flex-col justify-around gap-6 md:gap-10
             '>
-            <h1 
-              className='
+          <div>
+            <h1
+            className='
                 font-medium
-                text-2xl sm:text-3xl md:text-4xl lg:text-3xl xl:text-4xl 2xl:text-5xl
+                text-3xl sm:text-4xl md:text-5xl
                 text-(--text-secondary) leading-tight
               '>
-              {!authType ? <p>Log in to <span className='text-rose-600'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
-            </h1>
-            <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
-              Enter your details below...
-            </p>
+            {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
+          </h1>
+          <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
+            Enter your details below...
+          </p>
+          </div>
 
-            <form onSubmit={handleSubmit} className='flex flex-col gap-3 sm:gap-4 lg:gap-3 xl:gap-4 mt-6 sm:mt-8 lg:mt-6 xl:mt-8'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-3 sm:gap-4 lg:gap-3 xl:gap-4 mt-6 sm:mt-8 lg:mt-6 xl:mt-8'>
 
-              {/* SIGNUP INPUTS */}
-              {authType && (
-                <>
-                  <div className='flex flex-col sm:flex-row gap-3 sm:gap-6'>
-                    <input
-                      onChange={(e) => setFirstName(e.target.value)}
-                      value={firstName}
-                      type="text"
-                      placeholder='First Name'
-                      required
-                      className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
-                    />
-                    <input
-                      onChange={(e) => setLastName(e.target.value)}
-                      value={lastName}
-                      type="text"
-                      placeholder='Last Name'
-                      required
-                      className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
-                    />
-                  </div>
-
+            {/* SIGNUP INPUTS */}
+            {authType && (
+              <>
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-6'>
                   <input
-                    onChange={(e) => setPhone(e.target.value)}
-                    value={phone}
-                    type="tel"
-                    placeholder='Phone Number'
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
+                    type="text"
+                    placeholder='First Name'
                     required
-                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
                   />
+                  <input
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
+                    type="text"
+                    placeholder='Last Name'
+                    required
+                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
+                  />
+                </div>
 
-                  <div className='sm:flex items-center justify-between gap-4'>
-                    <input
+                <input
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                  type="tel"
+                  placeholder='Phone Number'
+                  required
+                  className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+                />
+
+                <div className='sm:flex items-center justify-between gap-4'>
+                  <input
                     onChange={(e) => setDob(e.target.value)}
                     value={dob}
                     type="date"
@@ -145,40 +147,40 @@ const Register = () => {
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                   </select>
-                  </div>
-                </>
-              )}
+                </div>
+              </>
+            )}
 
-              {/* COMMON FIELDS */}
+            {/* COMMON FIELDS */}
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              name="email"
+              value={email}
+              placeholder='Email'
+              required
+              className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+            />
+
+            <div className='relative'>
               <input
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                name="email"
-                value={email}
-                placeholder='Email'
+                onChange={(e) => setPassword(e.target.value)}
+                type={!showPassword ? "password" : "text"}
+                name="password"
+                value={password}
+                placeholder='Password'
                 required
-                className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+                className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 pr-16 outline-none text-sm sm:text-base lg:text-sm xl:text-base text-white rounded-lg bg-zinc-700 w-full focus:ring-2 focus:ring-rose-600 transition-all'
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className='absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 cursor-pointer text-(--text-secondary) text-xs sm:text-sm hover:text-(--color-primary) transition-colors select-none'
+              >
+                {!showPassword ? "show" : "hide"}
+              </span>
+            </div>
 
-              <div className='relative'>
-                <input
-                  onChange={(e) => setPassword(e.target.value)}
-                  type={!showPassword ? "password" : "text"}
-                  name="password"
-                  value={password}
-                  placeholder='Password'
-                  required
-                  className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 pr-16 outline-none text-sm sm:text-base lg:text-sm xl:text-base text-white rounded-lg bg-zinc-700 w-full focus:ring-2 focus:ring-rose-600 transition-all'
-                />
-                <span
-                  onClick={() => setShowPassword(!showPassword)}
-                  className='absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 cursor-pointer text-(--text-secondary) text-xs sm:text-sm hover:text-(--color-primary) transition-colors select-none'
-                >
-                  {!showPassword ? "show" : "hide"}
-                </span>
-              </div>
-
-              <button
+            <button
               type="submit"
               disabled={loading}
               className={`
@@ -196,13 +198,13 @@ const Register = () => {
               {
                 loading
                   ? <div className="flex justify-center items-center">
-                      <Ring2 size={20} stroke={3} speed={2} color="red" />
-                    </div>
+                    <Ring2 size={20} stroke={3} speed={2} color="red" />
+                  </div>
                   : (!authType ? "Log in" : "Sign up")
               }
             </button>
 
-              {/* Google Button */}
+            {/* Google Button */}
             <button
               onClick={async () => {
                 setLoading(true);
@@ -237,17 +239,21 @@ const Register = () => {
                 {!authType ? "Log in with Google" : "Sign up with Google"}
               </p>
             </button>
-            </form>
+          </form>
 
-            <p className='text-center mt-6 sm:mt-8 lg:mt-6 xl:mt-8 text-(--text-secondary) text-sm sm:text-base lg:text-sm xl:text-base'>
-              {!authType ? "Don't have an account?" : "Already have an account?"}{" "}
-              <span
-                onClick={() => setAuthType(!authType)}
-                className='cursor-pointer text-(--color-primary) tracking-wider font-semibold hover:underline'>
-                {!authType ? "Sign up" : "Log in"}
-              </span>
-            </p>
-          </div>
+          <p className='text-center mt-6 sm:mt-8 lg:mt-6 xl:mt-8 text-(--text-secondary) text-sm sm:text-base lg:text-sm xl:text-base'>
+            {!authType ? "Don't have an account?" : "Already have an account?"}{" "}
+            <span
+              onClick={() => setAuthType(!authType)}
+              className='cursor-pointer text-(--color-primary) tracking-wider font-semibold hover:underline'>
+              {!authType ? "Sign up" : "Log in"}
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <div className='mt-15'>
+        <Footer />
       </div>
     </div>
   )

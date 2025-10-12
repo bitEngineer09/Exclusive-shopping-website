@@ -1,9 +1,37 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { BsFillBagHeartFill } from "react-icons/bs";
 
 
-
-const GridMotion = ({ items = [], gradientColor = "black" }) => {
+const GridMotion = ({ items = [
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+  'exclusive',
+  'https://res.cloudinary.com/dapak9w0a/image/upload/v1759755547/loginModel1_bhbble.webp',
+], gradientColor = "black" }) => {
   const gridRef = useRef(null);
   const rowRefs = useRef([]);
   const mouseXRef = useRef(window.innerWidth / 2);
@@ -79,7 +107,7 @@ const GridMotion = ({ items = [], gradientColor = "black" }) => {
                   <div key={itemIndex} className="relative">
                     <div className="relative w-full h-full overflow-hidden rounded-[10px] bg-[#111] flex items-center justify-center text-white text-[1.5rem]">
                       {typeof content === "string" &&
-                      content.startsWith("http") ? (
+                        content.startsWith("http") ? (
                         <div
                           className="w-full h-full bg-cover bg-center absolute top-0 left-0"
                           style={{ backgroundImage: `url(${content})` }}

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { FaArrowRight } from "react-icons/fa";
 import FooterSecondary from './FooterSecondary';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { authDataContext } from '../../store/AuthContext';
 import ExploreMore from '../Home/ExploreMore';
 
@@ -10,12 +10,17 @@ const Footer = () => {
   // USE NAVIGATE
   const navigate = useNavigate();
 
+  const location = useLocation();
+  const currentPath = location.pathname;
+
   // CONTEXT DATA
   const { loggedinUserData } = useContext(authDataContext);
 
   return (
     <>
-      <ExploreMore />
+      {
+        currentPath !== "/auth" && <ExploreMore /> 
+      }
       <div className='
         w-full
         px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20
