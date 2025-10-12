@@ -68,7 +68,5 @@ Deployment:	Render (Server)
 
 <img width="1919" height="997" alt="Screenshot 2025-10-10 111129" src="https://github.com/user-attachments/assets/083069e2-8d23-4c11-9e70-d8f9e758aac6" /> </br>
 
-<img width="1919" height="996" alt="Screenshot 2025-10-10 111334" src="https://github.com/user-attachments/assets/5f31e361-1c57-405e-af67-cec1bce1c190" /> </br>
-
 
 
