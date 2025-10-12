@@ -65,7 +65,7 @@ const Register = () => {
           ">
 
         {/* GRID MOTION */}
-        <div className='hidden md:block absolute top-0'>
+        <div className='hidden md:block absolute top-0 inset-0'>
           <GridMotion />
         </div>
 
@@ -252,9 +252,7 @@ const Register = () => {
         </div>
       </div>
 
-      <div className='mt-15'>
         <Footer />
-      </div>
     </div>
   )
 }
