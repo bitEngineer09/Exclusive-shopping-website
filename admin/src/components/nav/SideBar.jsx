@@ -16,12 +16,12 @@ const SideBar = () => {
         <div
             className='
                 SideBar
-                w-full lg:w-[18rem] xl:w-[22rem] 2xl:w-[28rem]
-                min-h-screen lg:min-h-0
+                w-full lg:w-64 xl:w-80 2xl:w-96
+                h- lg:min-h-0
                 flex flex-col 
-                bg-[#1C1917] text-(--text-secondary)
-                px-[1rem] sm:px-[2rem] lg:px-[2rem] xl:px-[3rem]
-                py-[1rem] lg:py-0
+                bg-stone-900 text-stone-300
+                px-4 sm:px-6 lg:px-6 xl:px-8
+                py-4 lg:py-0
             '>
             <div
                onClick={() => {
@@ -29,18 +29,18 @@ const SideBar = () => {
                         setSideItem("listItems")
                     }}
                 className={`
-                    flex items-center justify-start gap-[1rem] sm:gap-[1.3rem] xl:gap-[1.6rem]
-                    mt-[1rem] sm:mt-[1.5rem] lg:mt-[2rem]
-                    w-full p-[1rem_1.5rem] sm:p-[1.2rem_1.8rem] xl:p-[1.5rem_2rem]
-                    hover:bg-[#44403C] hover:text-(--text-secondary)
-                    text-[1.3rem] sm:text-[1.6rem] lg:text-[1.8rem] xl:text-[2rem]
-                    text-(--text-secondary) text-center 
-                    border-zinc-400 transition-all duration-200 rounded-[0.7rem] xl:rounded-[0.9rem]
+                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    mt-4 sm:mt-6 lg:mt-8
+                    w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
+                    hover:bg-stone-700 hover:text-stone-300
+                    text-base sm:text-lg lg:text-xl xl:text-2xl
+                    text-stone-300 text-center 
+                    border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/" ? "bg-rose-800 hover:bg-rose-800" : ""}
                 `}>
-                <FaList className="flex-shrink-0" />
-                <span>List Items</span>
+                <FaList className="flex-shrink-0 text-lg sm:text-xl lg:text-2xl" />
+                <span className="whitespace-nowrap">List Items</span>
             </div>
 
             <div
@@ -49,18 +49,18 @@ const SideBar = () => {
                         setSideItem("addItems")
                     }}
                     className={`
-                    flex items-center justify-start gap-[1rem] sm:gap-[1.3rem] xl:gap-[1.6rem]
-                    mt-[1rem] sm:mt-[1.5rem] lg:mt-[2rem]
-                    w-full p-[1rem_1.5rem] sm:p-[1.2rem_1.8rem] xl:p-[1.5rem_2rem]
-                    hover:bg-[#44403C] hover:text-(--text-secondary)
-                    text-[1.3rem] sm:text-[1.6rem] lg:text-[1.8rem] xl:text-[2rem]
-                    text-(--text-secondary) text-center 
-                    border-zinc-400 transition-all duration-200 rounded-[0.7rem] xl:rounded-[0.9rem]
+                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    mt-4 sm:mt-6 lg:mt-8
+                    w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
+                    hover:bg-stone-700 hover:text-stone-300
+                    text-base sm:text-lg lg:text-xl xl:text-2xl
+                    text-stone-300 text-center 
+                    border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/add" ? "bg-emerald-700 hover:bg-emerald-800" : ""}
                 `}>
-                <FaPlus className="flex-shrink-0" />
-                <span>Add Items</span>
+                <FaPlus className="flex-shrink-0 text-lg sm:text-xl lg:text-2xl" />
+                <span className="whitespace-nowrap">Add Items</span>
             </div>
             
             <div
@@ -69,18 +69,18 @@ const SideBar = () => {
                         setSideItem("orders")
                     }}
                 className={`
-                    flex items-center justify-start gap-[1rem] sm:gap-[1.3rem] xl:gap-[1.6rem]
-                    mt-[1rem] sm:mt-[1.5rem] lg:mt-[2rem]
-                    w-full p-[1rem_1.5rem] sm:p-[1.2rem_1.8rem] xl:p-[1.5rem_2rem]
-                    hover:bg-[#44403C] hover:text-(--text-secondary)
-                    text-[1.3rem] sm:text-[1.6rem] lg:text-[1.8rem] xl:text-[2rem]
-                    text-(--text-secondary) text-center 
-                    border-zinc-400 transition-all duration-200 rounded-[0.7rem] xl:rounded-[0.9rem]
+                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    mt-4 sm:mt-6 lg:mt-8
+                    w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
+                    hover:bg-stone-700 hover:text-stone-300
+                    text-base sm:text-lg lg:text-xl xl:text-2xl
+                    text-stone-300 text-center 
+                    border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/orders" ? "bg-amber-700 hover:bg-amber-700" : ""}
                 `}>
-                <FaCheck className="flex-shrink-0" />
-                <span>View Orders</span>
+                <FaCheck className="flex-shrink-0 text-lg sm:text-xl lg:text-2xl" />
+                <span className="whitespace-nowrap">View Orders</span>
             </div>
         </div>
     )

@@ -33,18 +33,18 @@ const Login = () => {
 
 
     return (
-        <>
+        <div className=''>
             <Nav />
             <div className='w-full h-[calc(100%-6rem)] flex items-center justify-center mt-[3rem]'>
                 <div className="loginContainer w-[65rem] h-[70rem] p-[2rem] flex flex-col items-center">
                     <div className="header flex flex-col items-center justify-center">
                         <img src={adminLogo} alt="" className='w-[6rem]' />
-                        <p className='text-[3rem] font-medium'>Admin Dashboard
+                        <p className='text-[3rem] font-medium '>Admin Dashboard
                         </p>
                         <p className='text-[1.7rem] text-zinc-600'>Sign in to your account</p>
                     </div>
 
-                    <div className="formContainer w-full h-full rounded-[2rem] mt-[4rem] p-[2.5rem]">
+                    <div className="formContainer w-full h-full rounded-[2rem] mt-[4rem] p-[2.5rem] bg-zinc-950 text-white">
                         <h1 className='text-[2.7rem] mb-[3rem] text-center'>Welcome Back
                         </h1>
                         <div className='form w-full'>
@@ -64,11 +64,12 @@ const Login = () => {
                                         className='
                                             w-full 
                                             bg-slate-100
-                                            p-[2rem_4.5rem]
+                                            p-[1.5rem_4.5rem]
                                             border border-zinc-300 rounded-[1rem]
-                                            text-[1.5rem]
+                                            text-2xl
+                                            placeholder:text-black placeholder:font-medium
                                 '/>
-                                    <IoMailOutline className='absolute top-[5.1rem] left-[1.3rem] text-[2rem]' />
+                                    <IoMailOutline className='absolute top-[4.5rem] left-[1.3rem] text-[2rem] text-black' />
                                 </div>
 
                                 <div className="passwordDiv flex flex-col relative mt-[2rem]">
@@ -82,13 +83,14 @@ const Login = () => {
                                         value={password}
                                         placeholder='Enter your password'
                                         className='
-                                            w-full
+                                             w-full 
                                             bg-slate-100
-                                            p-[2rem_4.5rem]
+                                            p-[1.5rem_4.5rem]
                                             border border-zinc-300 rounded-[1rem]
-                                            text-[1.5rem]
+                                            text-2xl
+                                            placeholder:text-black placeholder:font-medium
                                         '/>
-                                    <FiLock className='absolute top-[5.1rem] left-[1.3rem] text-[2rem]' />
+                                    <FiLock className='absolute top-[4.5rem] left-[1.3rem] text-[2rem] text-black' />
                                     {
                                         showPassword ?
                                             <FaEye
@@ -108,7 +110,7 @@ const Login = () => {
                                         rounded-[1rem]
                                         text-[1.6rem] text-(--text-secondary) font-medium 
                                         cursor-pointer
-                                        bg-black 
+                                        bg-zinc-600 
                                     '>Sign in
                                 </button>
                             </form>
@@ -117,7 +119,7 @@ const Login = () => {
                 </div>
             </div>
             
-        </>
+        </div>
 
     )
 }
