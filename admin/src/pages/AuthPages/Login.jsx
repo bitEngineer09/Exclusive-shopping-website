@@ -66,7 +66,7 @@ const Login = () => {
                                             bg-slate-100
                                             p-[1.5rem_4.5rem]
                                             border border-zinc-300 rounded-[1rem]
-                                            text-2xl
+                                            text-2xl outline-none text-black
                                             placeholder:text-black placeholder:font-medium
                                 '/>
                                     <IoMailOutline className='absolute top-[4.5rem] left-[1.3rem] text-[2rem] text-black' />
@@ -87,7 +87,7 @@ const Login = () => {
                                             bg-slate-100
                                             p-[1.5rem_4.5rem]
                                             border border-zinc-300 rounded-[1rem]
-                                            text-2xl
+                                            text-2xl outline-none text-black
                                             placeholder:text-black placeholder:font-medium
                                         '/>
                                     <FiLock className='absolute top-[4.5rem] left-[1.3rem] text-[2rem] text-black' />

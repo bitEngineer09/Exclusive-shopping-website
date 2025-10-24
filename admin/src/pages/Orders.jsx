@@ -86,9 +86,9 @@ const Orders = () => {
                       </div>
 
                       {/* RIGHT SIDE CONTENT */}
-                      <div className='flex flex-col sm:flex-row xl:flex-col gap-[1.5rem] xl:gap-[2rem] w-full xl:w-auto'>
+                      <div className='flex flex-row items-center gap-[1.5rem] xl:gap-[5rem] w-full xl:w-auto'>
                         {/* ORDER DETAILS */}
-                        <div className='text-[0.95rem] sm:text-[1.1rem] md:text-[1.3rem] lg:text-[1.5rem] xl:text-[1.7rem] space-y-[0.5rem] sm:space-y-[0.6rem] md:space-y-[0.7rem] w-full sm:w-1/2 xl:w-auto'>
+                        <div className='text-[0.95rem] text-nowrap sm:text-[1.1rem] md:text-[1.3rem] lg:text-[1.5rem] xl:text-[1.7rem] space-y-[0.5rem] sm:space-y-[0.6rem] md:space-y-[0.7rem] w-full sm:w-1/2 xl:w-auto'>
                           <p>
                             Qty: {itemDetails.quantity}
                           </p>
