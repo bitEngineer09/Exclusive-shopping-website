@@ -24,10 +24,18 @@ const Orders = () => {
             flex flex-col overflow-auto
             gap-[1rem]
             w-full min-h-screen 
-            bg-[#0C0A09] 
+            bg-zinc-800
             px-[1rem] sm:px-[1.5rem] md:px-[2rem]
             pb-[2rem] sm:pb-[3rem] md:pb-[4rem]
           ">
+          <h1
+            className='
+              text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl
+              font-medium text-white
+              my-6
+            '>
+            Your <span className='text-rose-600'>orders</span>
+          </h1>
           {
             finalData?.map((itemDetails, index) => {
               const newDate = new Date(itemDetails.date).toLocaleDateString("en-IN", {
@@ -36,14 +44,14 @@ const Orders = () => {
                 day: "numeric"
               });
               return (
-                <div key={index} className='mt-[1.5rem] sm:mt-[2rem] md:mt-[3rem] text-white'>
+                <div key={index} className='text-white'>
                   <div className='flex items-center w-full justify-between'>
                     <span
-                      className='bg-zinc-900 p-[0.7rem] sm:p-[0.8rem] md:p-[1rem] rounded-[0.3rem] text-[1rem] sm:text-[1.3rem] md:text-[1.5rem] lg:text-[1.7rem] break-all'>
+                      className='bg-zinc-950 p-[0.7rem] sm:p-[0.8rem] md:p-[1rem] rounded-[0.3rem] text-[1rem] sm:text-[1.3rem] md:text-[1.5rem] lg:text-[1.7rem] break-all'>
                       #ORDER ID: {itemDetails?.orderId}
                     </span>
                   </div>
-                  <div className='w-full bg-zinc-900 p-[0.8rem] sm:p-[1rem] md:p-[1.3rem] rounded-[0.5rem] mt-[0.8rem] md:mt-[1rem]'>
+                  <div className='w-full bg-zinc-950 p-[0.8rem] sm:p-[1rem] md:p-[1.3rem] rounded-[0.5rem] mt-[0.8rem] md:mt-[1rem]'>
                     <div className='flex flex-col xl:flex-row justify-between items-start gap-[1.5rem] xl:gap-[2rem]'>
                       <div className='flex flex-col sm:flex-row gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] w-full xl:w-auto'>
 

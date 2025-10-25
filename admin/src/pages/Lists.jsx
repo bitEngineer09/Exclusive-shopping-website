@@ -41,20 +41,20 @@ const Lists = () => {
         <div
           className="
             mainContent flex-1
-            bg-[#0C0A09]
+            bg-zinc-800
             py-[1rem] sm:py-[1.5rem] md:py-[2rem]
             px-[1rem] sm:px-[2rem] md:px-[3rem]
             overflow-y-auto
             ">
-          <h1 className='text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] xl:text-[6rem] font-medium text-(--text-secondary)'>
-            Your Products
+          <h1 className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-medium text-white'>
+            Your <span className='text-rose-600'>products</span>
           </h1>
 
           <div className="productCards grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] mt-[1.5rem] md:mt-[2rem]">
             {
               products.map((product, index) => {
                 return (
-                  <div key={index} className='w-full flex flex-col sm:flex-row gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] p-[0.8rem] sm:p-[1rem] rounded-[0.8rem] md:rounded-[1rem] bg-[#1C1917]'>
+                  <div key={index} className='w-full flex flex-col sm:flex-row gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] p-[0.8rem] sm:p-[1rem] rounded-[0.8rem] md:rounded-[1rem] bg-zinc-950'>
                     <img 
                       src={product.image1} 
                       alt="" 

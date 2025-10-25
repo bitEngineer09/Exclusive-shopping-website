@@ -7,10 +7,10 @@ export default defineConfig({
     react(),
     tailwindcss()
   ],
-  base: '/', // ensure root path, change if subfolder pe host kar rahe ho
+  base: '/',
   build: {
     rollupOptions: {
-      input: '/index.html' // SPA routing ke liye fallback
+      input: '/index.html'
     }
   }
 });

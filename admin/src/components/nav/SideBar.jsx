@@ -3,7 +3,9 @@ import { FaPlus } from "react-icons/fa";
 import { FaList } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { CiBoxList } from "react-icons/ci";
+import { IoMdAdd } from "react-icons/io";
+import { MdCurrencyRupee } from "react-icons/md";
 
 const SideBar = () => {
 
@@ -19,9 +21,10 @@ const SideBar = () => {
                 w-full lg:w-64 xl:w-80 2xl:w-96
                 h- lg:min-h-0
                 flex flex-col 
-                bg-stone-900 text-stone-300
+                bg-[#09090B] text-white
                 px-4 sm:px-6 lg:px-6 xl:px-8
                 py-4 lg:py-0
+
             '>
             <div
                onClick={() => {
@@ -29,12 +32,12 @@ const SideBar = () => {
                         setSideItem("listItems")
                     }}
                 className={`
-                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    flex items-center justify-center gap-3 sm:gap-4 xl:gap-5
                     mt-4 sm:mt-6 lg:mt-8
                     w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
-                    hover:bg-stone-700 hover:text-stone-300
+                    hover:bg-stone-700 hover:text-white
                     text-base sm:text-lg lg:text-xl xl:text-2xl
-                    text-stone-300 text-center 
+                    text-white text-center 
                     border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/" ? "bg-rose-800 hover:bg-rose-800" : ""}
@@ -49,12 +52,12 @@ const SideBar = () => {
                         setSideItem("addItems")
                     }}
                     className={`
-                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    flex items-center justify-center gap-3 sm:gap-4 xl:gap-5
                     mt-4 sm:mt-6 lg:mt-8
                     w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
-                    hover:bg-stone-700 hover:text-stone-300
+                    hover:bg-stone-700 hover:text-white
                     text-base sm:text-lg lg:text-xl xl:text-2xl
-                    text-stone-300 text-center 
+                    text-white text-center 
                     border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/add" ? "bg-emerald-700 hover:bg-emerald-800" : ""}
@@ -69,12 +72,12 @@ const SideBar = () => {
                         setSideItem("orders")
                     }}
                 className={`
-                    flex items-center justify-start gap-3 sm:gap-4 xl:gap-5
+                    flex items-center justify-center gap-3 sm:gap-4 xl:gap-5
                     mt-4 sm:mt-6 lg:mt-8
                     w-full px-4 py-3 sm:px-6 sm:py-4 xl:px-7 xl:py-5
-                    hover:bg-stone-700 hover:text-stone-300
+                    hover:bg-stone-700 hover:text-white
                     text-base sm:text-lg lg:text-xl xl:text-2xl
-                    text-stone-300 text-center 
+                    text-white text-center 
                     border-zinc-400 transition-all duration-200 rounded-lg xl:rounded-xl
                     cursor-pointer 
                     ${location.pathname === "/orders" ? "bg-amber-700 hover:bg-amber-700" : ""}
