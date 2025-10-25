@@ -59,7 +59,7 @@ const Orders = () => {
                         <img
                           src={itemDetails.productDetails.image1}
                           alt=""
-                          className='w-full sm:w-[10rem] md:w-[12rem] lg:w-[15rem] h-[12rem] sm:h-[10rem] md:h-[12rem] lg:h-auto rounded-[0.5rem] object-cover flex-shrink-0'
+                          className='w-full sm:w-[10rem] md:w-[12rem] lg:w-[15rem] h-[30rem] sm:h-[10rem] md:h-[12rem] lg:h-auto rounded-[0.5rem] object-cover flex-shrink-0'
                         />
 
                         {/* MAIN CONTENT */}
