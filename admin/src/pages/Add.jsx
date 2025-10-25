@@ -3,9 +3,9 @@ import Nav from '../components/nav/Nav';
 import SideBar from '../components/nav/SideBar';
 import { ImImage } from "react-icons/im";
 import { productDataContext } from '../store/ProductContext';
-import { Leapfrog } from 'ldrs/react'
-import 'ldrs/react/Leapfrog.css'
-import ProductDetails from '../components/ProductDetails/productDetails';
+import { Leapfrog } from 'ldrs/react';
+import 'ldrs/react/Leapfrog.css';
+import ProductDetails from '../components/ProductDetails/ProductDetails';
 
 
 const Add = () => {
