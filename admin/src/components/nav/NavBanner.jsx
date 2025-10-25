@@ -4,7 +4,7 @@ const NavBanner = () => {
     return (
         <div
             className='
-                    hidden md:flex items-center justify-center text-center
+                    flex items-center justify-center text-center
                     w-full h-auto md:h-15
                     md:text-2xl
                     bg-white
@@ -14,7 +14,7 @@ const NavBanner = () => {
             <p className='hidden xl:block '>
                 “Drive your business forward — the dashboard is your cockpit.”
             </p>
-            <p className='hidden md:block xl:hidden'>
+            <p className='block xl:hidden'>
                 "Hey there, boss! Let’s make today’s sales shine."
             </p>
         </div>
