@@ -1,21 +1,70 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PrimaryNavbar from '../components/nav/PrimaryNavbar';
 import { authDataContext } from '../store/AuthContext';
 import ProfileInputForm from '../components/Profile/ProfileInputForm';
-
 import Footer from '../components/Footer/Footer';
 
 const Profile = () => {
-
     // CONTEXT DATA
-    const { loggedinUserData } = useContext(authDataContext);
+    const { loggedinUserData, isLoggedIn, checkAuth } = useContext(authDataContext);
+    const [loading, setLoading] = useState(true);
+    
+    // Debug logs
+    console.log("Profile Page - loggedinUserData:", loggedinUserData);
+    console.log("Profile Page - isLoggedIn:", isLoggedIn);
+
+    // Check authentication on component mount
+    useEffect(() => {
+        const verifyAuth = async () => {
+            setLoading(true);
+            try {
+                // Re-check authentication
+                await checkAuth?.();
+            } catch (error) {
+                console.error("Auth check failed:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        verifyAuth();
+    }, [checkAuth]);
+
+    // If no user data, show loading or redirect
+    if (loading) {
+        return (
+            <div className='w-full min-h-screen bg-(--bg-color) flex flex-col'>
+                <PrimaryNavbar />
+                <div className="flex-1 flex items-center justify-center">
+                    <div className="text-white text-xl">Loading profile...</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (!loggedinUserData) {
+        return (
+            <div className='w-full min-h-screen bg-(--bg-color) flex flex-col'>
+                <PrimaryNavbar />
+                <div className="flex-1 flex items-center justify-center">
+                    <div className="text-white text-xl text-center">
+                        <p>Please log in to view your profile</p>
+                        <button 
+                            onClick={() => window.location.href = '/auth'}
+                            className="mt-4 px-6 py-2 bg-rose-700 rounded-lg hover:bg-rose-600"
+                        >
+                            Go to Login
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     const memberDate = new Date(loggedinUserData?.createdAt).toDateString();
-
-
 
     return (
         <div className='w-full min-h-screen bg-(--bg-color) flex flex-col'>
-
             {/* NAVBAR */}
             <PrimaryNavbar />
 
@@ -68,7 +117,7 @@ const Profile = () => {
                             font-semibold
                             shadow-lg
                         '>
-                            {loggedinUserData?.name?.charAt(0)?.toUpperCase()}
+                            {loggedinUserData?.name?.charAt(0)?.toUpperCase() || 'U'}
                         </div>
 
                         {/* NAME */}
@@ -77,7 +126,7 @@ const Profile = () => {
                             font-semibold
                             text-center
                         '>
-                            {loggedinUserData?.name}
+                            {loggedinUserData?.name || 'User'}
                         </h2>
 
                         {/* EMAIL */}
@@ -88,7 +137,7 @@ const Profile = () => {
                             text-center
                             break-all
                         '>
-                            {loggedinUserData?.email}
+                            {loggedinUserData?.email || 'No email provided'}
                         </p>
                     </div>
                 </aside>
