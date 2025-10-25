@@ -1,9 +1,4 @@
 import React from 'react';
-import { BsFillBagHeartFill } from "react-icons/bs";
-import { MdOutlineSecurity } from "react-icons/md";
-import { MdShoppingCart } from "react-icons/md";
-import { IoIosStar } from "react-icons/io";
-import { MdCurrencyRupee } from "react-icons/md";
 
 const ReviewBanner = () => {
     return (
