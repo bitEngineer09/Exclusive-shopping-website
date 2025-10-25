@@ -50,7 +50,7 @@ const Lists = () => {
             Your <span className='text-rose-600'>products</span>
           </h1>
 
-          <div className="productCards grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] mt-[1.5rem] md:mt-[2rem]">
+          <div className="productCards grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-[1rem] sm:gap-[1.5rem] md:gap-[2rem] mt-[1.5rem] md:mt-[2rem]">
             {
               products.map((product, index) => {
                 return (
@@ -58,7 +58,7 @@ const Lists = () => {
                     <img 
                       src={product.image1} 
                       alt="" 
-                      className='w-full sm:w-[10rem] md:w-[12rem] lg:w-[15rem] h-[12rem] sm:h-[10rem] md:h-[12rem] lg:h-[15rem] rounded-[0.8rem] md:rounded-[1rem] object-cover' 
+                      className='w-full sm:w-[10rem] md:w-[12rem] lg:w-[15rem] h-[20rem] sm:h-[10rem] md:h-[12rem] lg:h-[15rem] rounded-[0.8rem] md:rounded-[1rem] object-cover' 
                     />
                     <div className="cardDetails flex justify-between w-full">
                       <div>
