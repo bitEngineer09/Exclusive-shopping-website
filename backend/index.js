@@ -28,7 +28,10 @@ app.use(session({
 app.use(requestIp.mw());
 
 app.use(cors({
-    origin: ["https://exclusive-shopping-website-frontend.onrender.com", "http://localhost:5174"],
+    origin: [
+        "https://exclusive-shopping-website-frontend.onrender.com",
+        "https://exclusive-shopping-website-admin.onrender.com"
+    ],
     credentials: true,
 }))
 
