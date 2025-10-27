@@ -32,6 +32,7 @@ const NavDesktop = ({
 
     // USE REF
     const popupRef = useRef(null);
+    const searchRef = useRef(null);
 
 
     useEffect(() => {
@@ -50,6 +51,10 @@ const NavDesktop = ({
         const handleClickOutside = (e) => {
             if (popupRef.current && !popupRef.current.contains(e.target)) {
                 setShowProfilePopup(false)
+            }
+
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                setFilteredProducts([]);
             }
         }
         document.addEventListener("mousedown", handleClickOutside);
@@ -196,7 +201,7 @@ const NavDesktop = ({
 
                         </div>
 
-                        <div className="left flex items-center justify-between w-full">
+                        <div className="flex items-center justify-between w-full">
 
                             <div
                                 onClick={() => {
@@ -263,7 +268,9 @@ const NavDesktop = ({
                             </div>
 
                             {/* NAV SEARCH */}
-                            <div className='justify-self-end relative bg-zinc-200 xl:w-[50%] 2xl:w-[60%] rounded-[0.3rem]'>
+                            <div    
+                                ref={searchRef}
+                                className='justify-self-end relative bg-zinc-200 xl:w-[62%] 2xl:w-[67%] rounded-[0.3rem]'>
                                 <input
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -290,10 +297,11 @@ const NavDesktop = ({
                                                 absolute
                                                 top-[110%] left-0
                                                 w-full 
-                                                bg-white text-black
-                                                rounded shadow-md
+                                                text-white bg-black
+                                                rounded-xl shadow-md
                                                 z-50 max-h-[200px]
                                                 overflow-y-auto
+                                                border-3 border-rose-700 
                                                 ">
                                             {filteredProducts.map(product => (
                                                 <div
@@ -303,7 +311,7 @@ const NavDesktop = ({
                                                         setSearchQuery("");
                                                         setFilteredProducts([]);
                                                     }}
-                                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-2"
                                                 >
                                                     {product.name}
                                                 </div>
@@ -313,7 +321,7 @@ const NavDesktop = ({
                                 }
                             </div>
 
-                            <div className="profile w-[7rem] flex flex-col items-center justify-between">
+                            <div className="profile w-[4rem] flex flex-col items-center justify-between">
                                 {
                                     showProfilePopup
                                         ? (<AiOutlineClose
