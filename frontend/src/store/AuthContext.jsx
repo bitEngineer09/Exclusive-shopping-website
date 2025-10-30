@@ -135,8 +135,6 @@ const AuthContext = ({ children }) => {
     }
 
 
-
-
     useEffect(() => {
         const fetchCurrentLoggedinUserData = async () => {
             try {
