@@ -35,18 +35,40 @@ const Register = () => {
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (authType) {
-      const result = await handleSignup(firstName, lastName, email, phone, dob, gender, password);
-      if (result?.data?.success) {
-        navigate('/');
-        // handleToast();
+    setLoading(true);
+    try {
+      if (authType) {
+        const result = await handleSignup(firstName, lastName, email, phone, dob, gender, password);
+        if (result?.data?.success) {
+          navigate('/');
+        }
+      } else {
+        const result = await handleLogin(email, password);
+        if (result?.data?.success) {
+          navigate('/');
+        }
       }
-    } else {
-      const result = await handleLogin(email, password);
-      if (result?.data?.success) {
-        navigate('/');
-        // handleToast();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  // HANDLE GOOGLE AUTH
+  const handleGoogleAuth = async () => {
+    setLoading(true);
+    try {
+      if (!authType) {
+        await googleLogin();
+      } else {
+        await googleSignup();
       }
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -106,7 +128,8 @@ const Register = () => {
                     type="text"
                     placeholder='First Name'
                     required
-                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
+                    disabled={loading}
+                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                   <input
                     onChange={(e) => setLastName(e.target.value)}
@@ -114,7 +137,8 @@ const Register = () => {
                     type="text"
                     placeholder='Last Name'
                     required
-                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all'
+                    disabled={loading}
+                    className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 w-full sm:w-1/2 focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                   />
                 </div>
 
@@ -124,7 +148,8 @@ const Register = () => {
                   type="tel"
                   placeholder='Phone Number'
                   required
-                  className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+                  disabled={loading}
+                  className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                 />
 
                 <div className='sm:flex items-center justify-between gap-4'>
@@ -133,14 +158,16 @@ const Register = () => {
                     value={dob}
                     type="date"
                     required
-                    className='w-full mb-3 sm:mb-0 p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+                    disabled={loading}
+                    className='w-full mb-3 sm:mb-0 p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                   />
 
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
                     required
-                    className='w-full p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 cursor-pointer focus:ring-2 focus:ring-rose-600 transition-all'
+                    disabled={loading}
+                    className='w-full p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 cursor-pointer focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
                   >
                     <option value="" disabled>Select Gender</option>
                     <option value="male">Male</option>
@@ -159,7 +186,8 @@ const Register = () => {
               value={email}
               placeholder='Email'
               required
-              className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all'
+              disabled={loading}
+              className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 outline-none text-sm sm:text-base lg:text-sm xl:text-base rounded-lg text-white bg-zinc-700 focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
             />
 
             <div className='relative'>
@@ -170,11 +198,12 @@ const Register = () => {
                 value={password}
                 placeholder='Password'
                 required
-                className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 pr-16 outline-none text-sm sm:text-base lg:text-sm xl:text-base text-white rounded-lg bg-zinc-700 w-full focus:ring-2 focus:ring-rose-600 transition-all'
+                disabled={loading}
+                className='p-3 sm:p-3.5 lg:p-3 xl:p-3.5 pr-16 outline-none text-sm sm:text-base lg:text-sm xl:text-base text-white rounded-lg bg-zinc-700 w-full focus:ring-2 focus:ring-rose-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
               />
               <span
-                onClick={() => setShowPassword(!showPassword)}
-                className='absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 cursor-pointer text-(--text-secondary) text-xs sm:text-sm hover:text-(--color-primary) transition-colors select-none'
+                onClick={() => !loading && setShowPassword(!showPassword)}
+                className={`absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-(--text-secondary) text-xs sm:text-sm hover:text-(--color-primary) transition-colors select-none ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
               >
                 {!showPassword ? "show" : "hide"}
               </span>
@@ -206,46 +235,42 @@ const Register = () => {
 
             {/* Google Button */}
             <button
-              onClick={async () => {
-                setLoading(true);
-                try {
-                  if (!authType) {
-                    await googleLogin();
-                    navigate('/');
-                  } else {
-                    await googleSignup();
-                    navigate('/');
-                  }
-                } catch (error) {
-                  console.error(error);
-                } finally {
-                  setLoading(false);
-                }
-              }}
+              onClick={handleGoogleAuth}
               type="button"
-              className='
+              disabled={loading}
+              className={`
                 w-full h-11 sm:h-12
                 flex items-center justify-center
                 gap-2
                 bg-zinc-300 hover:bg-zinc-200
-                rounded-lg cursor-pointer
+                rounded-lg
                 text-sm sm:text-base
                 transition-all duration-200
                 active:scale-[0.98]
-              '
+                ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}
+              `}
             >
-              <img src={google} alt="Google" className='w-5 h-5 sm:w-6 sm:h-6' />
-              <p className='font-medium'>
-                {!authType ? "Log in with Google" : "Sign up with Google"}
-              </p>
+              {
+                loading
+                  ? <Ring2 size={20} stroke={3} speed={2} color="black" />
+                  : (
+                    <>
+                      <img src={google} alt="Google" className='w-5 h-5 sm:w-6 sm:h-6' />
+                      <p className='font-medium'>
+                        {!authType ? "Log in with Google" : "Sign up with Google"}
+                      </p>
+                    </>
+                  )
+              }
             </button>
           </form>
 
           <p className='text-center mt-6 sm:mt-8 lg:mt-6 xl:mt-8 text-(--text-secondary) text-sm sm:text-base lg:text-sm xl:text-base'>
             {!authType ? "Don't have an account?" : "Already have an account?"}{" "}
             <span
-              onClick={() => setAuthType(!authType)}
-              className='cursor-pointer text-(--color-primary) tracking-wider font-semibold hover:underline'>
+              onClick={() => !loading && setAuthType(!authType)}
+              className={`text-(--color-primary) tracking-wider font-semibold ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:underline'}`}
+            >
               {!authType ? "Sign up" : "Log in"}
             </span>
           </p>
