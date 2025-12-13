@@ -57,7 +57,7 @@ const ItemDetails = ({
 
                 {/* ITEM NAME */}
                 <h1 className='
-                        text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl
+                        text-lg sm:text-xl md:text-2xl xl:text-3xl
                         tracking-wide
                 '>
                     {item.name}
