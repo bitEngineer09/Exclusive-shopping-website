@@ -223,7 +223,7 @@ export const editUser = async (req, res) => {
                 gender: updatedUser.gender,
                 email: updatedUser.email
             }
-        })
+        });
 
     } catch (error) {
         console.error(error.message);

@@ -7,10 +7,12 @@ const CartContext = ({ children }) => {
 
     // USE STATES
     const [cartItems, setCartItems] = useState([]);
+    const [isCartLoading, setIsCartLoading] = useState(true);
 
     // GET CART ITEMS
     const getAllCartItems = async () => {
         try {
+            setIsCartLoading(true);
             const response = await getCartItems();
             if (response?.cart) {
                 setCartItems(response?.cart);
@@ -19,6 +21,8 @@ const CartContext = ({ children }) => {
             return response;
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsCartLoading(false);
         }
     }
 
@@ -75,8 +79,12 @@ const CartContext = ({ children }) => {
 
 
     const value = {
-        cartItems, setCartItems,
-        getAllCartItems, addItemsToCart, deleteItemsFromCart,
+        cartItems, 
+        setCartItems,
+        isCartLoading,
+        getAllCartItems, 
+        addItemsToCart, 
+        deleteItemsFromCart,
         removeItem
     }
 
