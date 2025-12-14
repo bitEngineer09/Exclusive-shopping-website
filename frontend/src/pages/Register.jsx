@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PrimaryNavbar from '../components/nav/PrimaryNavbar';
 import google from '../assets/googleBlack.png';
 import { authDataContext } from '../store/AuthContext';
+import { MdOutlineErrorOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { Ring2 } from 'ldrs/react';
 import 'ldrs/react/Ring2.css';
@@ -14,6 +15,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [authType, setAuthType] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Registration states
   const [firstName, setFirstName] = useState('');
@@ -41,11 +43,16 @@ const Register = () => {
         const result = await handleSignup(firstName, lastName, email, phone, dob, gender, password);
         if (result?.data?.success) {
           navigate('/');
+        } else {
+          setError(result?.message?.response?.data?.message || "Sign up failed. Please try again");
         }
       } else {
         const result = await handleLogin(email, password);
+        // console.log(result?.message?.response?.data?.message)
         if (result?.data?.success) {
           navigate('/');
+        } else {
+          setError(result?.message?.response?.data?.message || "Login failed. Please try again");
         }
       }
     } catch (error) {
@@ -104,16 +111,16 @@ const Register = () => {
             '>
           <div>
             <h1
-            className='
+              className='
                 font-medium
                 text-3xl sm:text-4xl md:text-5xl
                 text-(--text-secondary) leading-tight
               '>
-            {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
-          </h1>
-          <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
-            Enter your details below...
-          </p>
+              {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
+            </h1>
+            <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
+              Enter your details below...
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className='flex flex-col gap-3 sm:gap-4 lg:gap-3 xl:gap-4 mt-6 sm:mt-8 lg:mt-6 xl:mt-8'>
@@ -209,6 +216,19 @@ const Register = () => {
               </span>
             </div>
 
+            {/* Error Field */}
+            {
+              error ? <div className='w-full h-11 sm:h-12 bg-red-500
+                text-(--text-secondary) mt-2
+                rounded-lg font-medium tracking-wide
+                text-sm sm:text-base
+                flex justify-center items-center
+                border-3 border-red-800
+              '>
+                <p className="flex items-center gap-1"><MdOutlineErrorOutline />{error}</p>
+              </div> : null
+            }
+
             <button
               type="submit"
               disabled={loading}
@@ -277,7 +297,7 @@ const Register = () => {
         </div>
       </div>
 
-        <Footer />
+      <Footer />
     </div>
   )
 }
