@@ -3,10 +3,8 @@ import { FaMicrophoneAlt } from "react-icons/fa";
 import { BsRobot } from "react-icons/bs";
 import { CgNotes } from "react-icons/cg";
 import { FaRegLightbulb } from "react-icons/fa";
-import CommandItem from './CommandItem';
 
 const HelpModal = ({ setShowHelpModal }) => {
-
 
     const closeHelpModal = () => {
         setShowHelpModal(false);
@@ -111,5 +109,11 @@ const HelpModal = ({ setShowHelpModal }) => {
     )
 }
 
+export default HelpModal;
 
-export default HelpModal
+const CommandItem = ({ command, description }) => (
+    <div className="flex items-start gap-3 border-b border-gray-200 pb-2 last:border-0 last:pb-0">
+        <span className="text-rose-600 font-mono text-sm font-semibold mt-0.5">"{command}"</span>
+        <span className="text-gray-600 text-sm flex-1">→ {description}</span>
+    </div>
+)
