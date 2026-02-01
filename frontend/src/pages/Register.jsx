@@ -99,6 +99,12 @@ const Register = () => {
               '>
               {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
             </h1>
+<<<<<<< HEAD
+=======
+            <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
+              Enter your details below...
+            </p>
+>>>>>>> 11cb5da1e8cd08f32f29e6ca26522b7032a8f279
           </div>
 
           <form onSubmit={handleSubmit} className='flex flex-col gap-1 sm:gap-4 lg:gap-3 xl:gap-4 mt-3'>
