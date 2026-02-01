@@ -100,8 +100,7 @@ const LatestCollections = () => {
                                                 transition-all duration-300
                                                 hover:scale-[1.02]
                                                 flex flex-col
-                                                '
-                                        >
+                                                '>
                                             {/* PRODUCT IMAGE */}
                                             <div className='
                                                 relative
@@ -119,8 +118,7 @@ const LatestCollections = () => {
                                                         object-cover
                                                         hover:scale-110
                                                         transition-transform duration-500
-                                                        '
-                                                />
+                                                        '/>
                                             </div>
 
                                             {/* PRODUCT DETAILS */}

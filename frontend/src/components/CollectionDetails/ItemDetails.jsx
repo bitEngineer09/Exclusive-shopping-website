@@ -4,7 +4,6 @@ import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { GoHeartFill } from "react-icons/go";
-import { FaHeart } from "react-icons/fa6";
 import RatingStars from '../RatingStars';
 import { useNavigate } from 'react-router-dom';
 import { authDataContext } from '../../store/AuthContext';
@@ -158,35 +157,31 @@ const ItemDetails = ({
 
                 {/* FEATURES SECTION */}
                 <div className="
-            features
-            w-full
-            hidden xl:flex 
-            justify-between
-            gap-4
-            border-2 border-zinc-700 
-            rounded-xl
-            p-6 lg:p-8
-        ">
+                     features w-full
+                     hidden xl:flex 
+                     justify-between gap-4
+                     border-2 border-zinc-700 
+                     rounded-xl p-6 lg:p-8
+                     ">
                     {
                         features.map((feature, index) => {
                             return (
                                 <div
                                     key={index}
                                     className='
-                                flex flex-col 
-                                items-center justify-center
-                                gap-2
-                                text-center
-                            '
-                                >
+                                    flex flex-col 
+                                    items-center justify-center
+                                    gap-2
+                                    text-center
+                                    '>
                                     <div className='text-2xl lg:text-3xl'>
                                         {feature.icon}
                                     </div>
                                     <p className='
-                                tracking-wide 
-                                text-xs lg:text-sm
-                                text-zinc-300
-                            '>
+                                        tracking-wide 
+                                        text-xs lg:text-sm
+                                        text-zinc-300
+                                        '>
                                         {feature.content}
                                     </p>
                                 </div>
@@ -200,29 +195,29 @@ const ItemDetails = ({
                         flex items-center justify-between
                         gap-3 md:gap-4 lg:gap-6
                         flex-wrap
-                '>
+                        '>
 
                     {/* COUNTER */}
                     <div className='flex items-center gap-4'>
                         <div className="
-                    counter
-                    flex items-center
-                    rounded-lg
-                    overflow-hidden
-                    h-10
-                    w-40
-                ">
+                                counter
+                                flex items-center
+                                rounded-lg
+                                overflow-hidden
+                                h-10
+                                w-40
+                                ">
                             <button
                                 onClick={handleDecrement}
                                 className='
-                            h-full
-                            flex justify-center items-center
-                            bg-pink-700
-                            hover:bg-pink-600
-                            transition-colors duration-200
-                            cursor-pointer
-                            px-4 md:px-5
-                        '>
+                                h-full
+                                flex justify-center items-center
+                                bg-pink-700
+                                hover:bg-pink-600
+                                transition-colors duration-200
+                                cursor-pointer
+                                px-4 md:px-5
+                                '>
                                 <FaMinus className='text-sm md:text-base' />
                             </button>
                             <div className='
