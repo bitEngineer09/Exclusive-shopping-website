@@ -1,7 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { editUser, getCurrentLoggedInUserData, googleLoginService, googleSignupService, loginService, logoutService, signupService } from '../services/auth.services';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '../utils/Firebase';
+import { editUser, getCurrentLoggedInUserData, loginService, logoutService, signupService } from '../services/auth.services';
 
 export const authDataContext = createContext();
 const AuthContext = ({ children }) => {
@@ -80,61 +78,6 @@ const AuthContext = ({ children }) => {
         }
     }
 
-
-    // GOOGLE SIGNUP
-    const googleSignup = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            console.log("UserCredential: ", result);
-
-            const user = result.user;
-            // const uId = user.uid;
-            const name = user.displayName;
-            const email = user.email;
-            // console.log("uId:", user.uid);
-            // console.log("name:", user.displayName);
-            // console.log("email:", user.email);
-            // console.log("photo:", user.photoURL);
-
-            const response = await googleSignupService(name, email);
-            setLoggedinUserData(response?.data?.user);
-            // console.log(response.data);
-            return response.data;
-
-        } catch (error) {
-            console.log(error);
-            return {
-                success: false,
-                error: error,
-            }
-        }
-    }
-
-
-    // GOOGLE LOGIN
-    const googleLogin = async () => {
-        try {
-            const result = await signInWithPopup(auth, provider);
-            console.log("UserCredential: ", result);
-
-            const user = result.user;
-            const email = user.email;
-
-            const response = await googleLoginService(email);
-            setLoggedinUserData(response?.data?.user);
-            console.log(response?.data);
-            return response.data;
-
-        } catch (error) {
-            console.log(error);
-            return {
-                success: false,
-                error: error,
-            }
-        }
-    }
-
-
     useEffect(() => {
         const fetchCurrentLoggedinUserData = async () => {
             try {
@@ -152,15 +95,9 @@ const AuthContext = ({ children }) => {
     }, [])
 
 
-
     const value = {
-
         loggedinUserData, setLoggedinUserData,
-
         handleLogin, handleSignup, handleLogout, handleLoggedInUser,
-
-        googleSignup, googleLogin,
-
         handleUpdateUserData
     }
 

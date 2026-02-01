@@ -98,34 +98,3 @@ export const editUser = async (firstName, lastName, phone, dob, gender) => {
 }
 
 
-// GOOGLE SIGNUP SERVICES
-export const googleSignupService = async (name, email) => {
-    try {
-        const response = await axios.post(serverUrl + "/api/auth/googleSignup", { name, email }, { withCredentials: true });
-        // console.log(response);
-        return response;
-
-    } catch (error) {
-        return {
-            success: false,
-            message: error,
-        }
-    }
-}
-
-
-// GOOGLE LOGIN SERVICES
-export const googleLoginService = async (email) => {
-    try {
-        const response = await axios.post(serverUrl + "/api/auth/googleLogin", { email }, { withCredentials: true });
-        console.log(response);
-        return response;
-
-    } catch (error) {
-        return {
-            success: false,
-            message: error,
-        }
-    }
-}
-

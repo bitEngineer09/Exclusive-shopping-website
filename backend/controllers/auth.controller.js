@@ -2,8 +2,6 @@ import { User } from "../models/user.model.js";
 import {
     authenticate,
     clearSession,
-    createAccessTokenAdmin,
-    createUserByEmail,
     findUserByEmail,
     findUserById,
     hashPassword,
@@ -151,59 +149,6 @@ export const getUserData = async (req, res) => {
 };
 
 
-// GOOGLE SIGNUP CONTROLLER
-export const googleSignUp = async (req, res) => {
-    try {
-        const { name, email } = req.body;
-        // console.log(name, email)
-        const user = await findUserByEmail(email);
-        if (user) return res.status(400).json({ success: false, message: "User already exists" });
-
-        const newUser = await createUserByEmail(name, email);
-        if (!newUser) return res.status(404).json({ success: false, message: "Internal server error" });
-
-        await authenticate(req, res, newUser);
-        return res.status(201).json({
-            success: true,
-            message: "Google signup successful",
-            user: {
-                id: newUser._id,
-                name: newUser.name,
-                email: newUser.email
-            }
-        });
-
-    } catch (error) {
-        console.log(error)
-        return res.status(400).json({
-            success: false,
-            message: error.message || "Google signup failed",
-        })
-    }
-}
-
-
-// GOOGLE LOGIN CONTROLLER
-export const googleLogin = async (req, res) => {
-    try {
-        const { email } = req.body;
-        console.log("email", email);
-
-        const user = await findUserByEmail(email);
-        if (!user) return res.status(400).json({ success: false, message: "User not registered. Try with different email" });
-
-        await authenticate(req, res, user);
-        return res.status(200).json({ success: true, user: user });
-
-    } catch (error) {
-        return res.status(400).json({
-            success: false,
-            message: error.message || "Google login failed"
-        })
-    }
-}
-
-
 // EDIT USER DATA
 export const editUser = async (req, res) => {
     try {
@@ -230,32 +175,4 @@ export const editUser = async (req, res) => {
         return res.status(400).json({ success: false, error: error.message });
     }
 }
-
-// ADMIN LOGIN CONTROLLER
-// export const adminLogin = async (req, res) => {
-//     try {
-//         const {email, password} = req.body;
-//         if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
-//             const adminToken = createAccessTokenAdmin(email);
-//             // console.log(adminToken)
-
-//             res.cookie("admin_token", adminToken, {
-//                 httpOnly: true,
-//                 secure: false,
-//                 sameSite: "strict",
-//                 maxAge: 7 * 24 * 60 * 60 * 1000
-//             })
-//             return res.status(200).json({success: true, message: adminToken});
-//         }
-//         return res.status(400).json({success: false, message: "Invalid Credentials"});
-
-//     } catch (error) {
-//         return res
-//             .status(400)
-//             .json({
-//                 success: false,
-//                 message: error.message || "admin login controller error"
-//             })
-//     }
-// }
 

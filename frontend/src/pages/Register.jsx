@@ -1,7 +1,7 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import PrimaryNavbar from '../components/nav/PrimaryNavbar';
-import google from '../assets/googleBlack.png';
 import { authDataContext } from '../store/AuthContext';
+import { MdOutlineErrorOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { Ring2 } from 'ldrs/react';
 import 'ldrs/react/Ring2.css';
@@ -14,6 +14,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [authType, setAuthType] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Registration states
   const [firstName, setFirstName] = useState('');
@@ -29,7 +30,6 @@ const Register = () => {
   // CONTEXT DATA
   const {
     handleLogin, handleSignup,
-    googleSignup, googleLogin
   } = useContext(authDataContext);
 
   // HANDLE SUBMIT
@@ -41,30 +41,18 @@ const Register = () => {
         const result = await handleSignup(firstName, lastName, email, phone, dob, gender, password);
         if (result?.data?.success) {
           navigate('/');
+        } else {
+          setError(result?.message?.response?.data?.message || "Sign up failed. Please try again");
         }
       } else {
         const result = await handleLogin(email, password);
+        // console.log(result?.message?.response?.data?.message)
         if (result?.data?.success) {
           navigate('/');
+        } else {
+          setError(result?.message?.response?.data?.message || "Login failed. Please try again");
         }
       }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  // HANDLE GOOGLE AUTH
-  const handleGoogleAuth = async () => {
-    setLoading(true);
-    try {
-      if (!authType) {
-        await googleLogin();
-      } else {
-        await googleSignup();
-      }
-      navigate('/');
     } catch (error) {
       console.error(error);
     } finally {
@@ -98,25 +86,22 @@ const Register = () => {
               border-5 border-black
               backdrop-blur-xl
               rounded-xl md:rounded-2xl
-              p-6 sm:p-8 md:p-10
+              p-4 sm:p-8 md:p-7
               w-[30rem] md:w-[37rem]
-              flex flex-col justify-around gap-6 md:gap-10
+              flex flex-col justify-around gap-2
             '>
           <div>
             <h1
-            className='
+              className='
                 font-medium
                 text-3xl sm:text-4xl md:text-5xl
                 text-(--text-secondary) leading-tight
               '>
-            {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
-          </h1>
-          <p className='text-sm sm:text-base lg:text-sm xl:text-lg text-(--text-secondary) mt-1 sm:mt-2 underline underline-offset-4'>
-            Enter your details below...
-          </p>
+              {!authType ? <p>Log in to <span className='text-rose-600 font-semibold'>exclusive</span></p> : <p>Create an<span className='text-rose-600'> Account</span></p>}
+            </h1>
           </div>
 
-          <form onSubmit={handleSubmit} className='flex flex-col gap-3 sm:gap-4 lg:gap-3 xl:gap-4 mt-6 sm:mt-8 lg:mt-6 xl:mt-8'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-1 sm:gap-4 lg:gap-3 xl:gap-4 mt-3'>
 
             {/* SIGNUP INPUTS */}
             {authType && (
@@ -209,6 +194,19 @@ const Register = () => {
               </span>
             </div>
 
+            {/* Error Field */}
+            {
+              error ? <div className='w-full h-11 sm:h-12 bg-red-500
+                text-(--text-secondary) mt-2
+                rounded-lg font-medium tracking-wide
+                text-sm sm:text-base
+                flex justify-center items-center
+                border-3 border-red-800
+              '>
+                <p className="flex items-center gap-1"><MdOutlineErrorOutline />{error}</p>
+              </div> : null
+            }
+
             <button
               type="submit"
               disabled={loading}
@@ -232,40 +230,9 @@ const Register = () => {
                   : (!authType ? "Log in" : "Sign up")
               }
             </button>
-
-            {/* Google Button */}
-            <button
-              onClick={handleGoogleAuth}
-              type="button"
-              disabled={loading}
-              className={`
-                w-full h-11 sm:h-12
-                flex items-center justify-center
-                gap-2
-                bg-zinc-300 hover:bg-zinc-200
-                rounded-lg
-                text-sm sm:text-base
-                transition-all duration-200
-                active:scale-[0.98]
-                ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}
-              `}
-            >
-              {
-                loading
-                  ? <Ring2 size={20} stroke={3} speed={2} color="black" />
-                  : (
-                    <>
-                      <img src={google} alt="Google" className='w-5 h-5 sm:w-6 sm:h-6' />
-                      <p className='font-medium'>
-                        {!authType ? "Log in with Google" : "Sign up with Google"}
-                      </p>
-                    </>
-                  )
-              }
-            </button>
           </form>
 
-          <p className='text-center mt-6 sm:mt-8 lg:mt-6 xl:mt-8 text-(--text-secondary) text-sm sm:text-base lg:text-sm xl:text-base'>
+          <p className='text-center mt-6 sm:mt-8 lg:mt-3 text-(--text-secondary) text-sm sm:text-base lg:text-sm xl:text-base'>
             {!authType ? "Don't have an account?" : "Already have an account?"}{" "}
             <span
               onClick={() => !loading && setAuthType(!authType)}
@@ -277,7 +244,7 @@ const Register = () => {
         </div>
       </div>
 
-        <Footer />
+      <Footer />
     </div>
   )
 }
