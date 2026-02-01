@@ -311,7 +311,7 @@ const NavDesktop = ({
                                                         setSearchQuery("");
                                                         setFilteredProducts([]);
                                                     }}
-                                                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer border-b-2"
+                                                    className="px-4 py-2 hover:bg-gray-100 hover:text-black cursor-pointer border-b-2"
                                                 >
                                                     {product.name}
                                                 </div>
