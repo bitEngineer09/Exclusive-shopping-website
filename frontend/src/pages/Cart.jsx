@@ -24,10 +24,10 @@ const Cart = () => {
   // NAVIGATION
   const navigate = useNavigate();
 
-
   // CONTEXT DATA
   const { cartItems, setCartItems, isCartLoading } = useContext(cartDataContext);
   const { loggedinUserData } = useContext(authDataContext);
+  // console.log(loggedinUserData);
 
 
   // TOTAL PRICE
@@ -57,8 +57,6 @@ const Cart = () => {
   }, [cartItems])
 
   // console.log(cartItems)
-
-
 
   // UPDATE ITEM QUANTITY
   const handleUpdateQuantity = (id, newQuantity) => {
@@ -116,15 +114,15 @@ const Cart = () => {
                       {/* LEFT CONTENT - Cart Items */}
                       <div className='flex-1 lg:sticky lg:top-8 lg:h-fit'>
                         <div className='
-                            bg-zinc-900 
-                            p-4 md:p-6 lg:p-8
-                            rounded-xl
-                            '>
+                              bg-zinc-900 
+                              p-4 md:p-6 lg:p-8
+                              rounded-xl
+                              '>
                           <h2 className='
-                text-white 
-                text-2xl md:text-3xl lg:text-4xl
-                font-semibold
-              '>
+                              text-white 
+                              text-2xl md:text-3xl lg:text-4xl
+                              font-semibold
+                              '>
                             Shopping Cart
                           </h2>
 
@@ -132,10 +130,10 @@ const Cart = () => {
 
                           {/* CART ITEMS */}
                           <div className='
-                flex flex-col
-                gap-4 md:gap-6
-                mt-4 md:mt-6
-              '>
+                                flex flex-col
+                                gap-4 md:gap-6
+                                mt-4 md:mt-6
+                                '>
                             {
                               cartItems.map((item, index) => {
                                 return (
@@ -151,13 +149,13 @@ const Cart = () => {
 
                           {/* SUBTOTAL */}
                           <div className='
-                flex items-center justify-end 
-                gap-2
-                py-4 md:py-6
-                mt-4 md:mt-6
-                text-lg md:text-xl lg:text-2xl
-                text-white
-              '>
+                                flex items-center justify-end 
+                                gap-2
+                                py-4 md:py-6
+                                mt-4 md:mt-6
+                                text-lg md:text-xl lg:text-2xl
+                                text-white
+                                '>
                             <span>Subtotal ({totalQuantity} items):</span>
                             <span className='flex items-center font-semibold underline underline-offset-2'>
                               <MdOutlineCurrencyRupee />
@@ -171,14 +169,14 @@ const Cart = () => {
 
                         {/* DISCLAIMER */}
                         <div className='
-              bg-rose-900 
-              mt-4 md:mt-6
-              p-4 md:p-6 lg:p-8
-              rounded-xl
-              text-zinc-100
-              text-xs md:text-sm
-              leading-relaxed
-            '>
+                              bg-rose-900 
+                              mt-4 md:mt-6
+                              p-4 md:p-6 lg:p-8
+                              rounded-xl
+                              text-zinc-100
+                              text-xs md:text-sm
+                              leading-relaxed
+                              '>
                           <p>
                             The price and availability of items at exclusive are subject to change.
                             The shopping cart is a temporary place to store a list of your items and
@@ -190,18 +188,17 @@ const Cart = () => {
 
                       {/* RIGHT CONTENT - Order Summary */}
                       <div className='
-            lg:w-96 xl:w-[28rem]
-            flex flex-col 
-            gap-4 md:gap-6
-          '>
+                            lg:w-96 xl:w-[28rem]
+                            flex flex-col 
+                            gap-4 md:gap-6
+                            '>
                         {/* ORDER SUMMARY CARD */}
                         <div className='
-              p-4 md:p-6 lg:p-8
-              bg-zinc-900 
-              rounded-xl
-              text-white
-              
-            '>
+                              p-4 md:p-6 lg:p-8
+                              bg-zinc-900 
+                              rounded-xl
+                              text-white
+                                                  '>
                           {/* PROGRESS BAR */}
                           <div className='w-full flex items-center gap-3'>
                             <div className='flex-1'>
@@ -218,12 +215,11 @@ const Cart = () => {
 
                           {/* DELIVERY MESSAGE */}
                           <div className='
-                flex items-start
-                gap-2
-                mt-4
-                text-sm md:text-base
-                text-emerald-400
-              '>
+                                flex items-start
+                                gap-2 mt-4
+                                text-sm md:text-base
+                                text-emerald-400
+                                '>
                             <RiVerifiedBadgeFill className='mt-0.5 flex-shrink-0' />
                             <p>
                               {
@@ -236,12 +232,11 @@ const Cart = () => {
 
                           {/* SUBTOTAL */}
                           <div className='
-                flex items-center justify-between 
-                mt-6
-                pt-6
-                border-t border-zinc-700
-                text-lg md:text-xl
-              '>
+                                flex items-center justify-between 
+                                mt-6 pt-6
+                                border-t border-zinc-700
+                                text-lg md:text-xl
+                                '>
                             <span>Subtotal ({totalQuantity} items):</span>
                             <span className='flex items-center font-semibold'>
                               <MdOutlineCurrencyRupee />
@@ -268,19 +263,14 @@ const Cart = () => {
                               }
                             }}
                             className='
-                  w-full
-                  py-3 md:py-4
-                  bg-indigo-600
-                  hover:bg-indigo-700
-                  text-white
-                  font-semibold
-                  text-base md:text-lg
-                  rounded-full
-                  mt-6
-                  cursor-pointer
-                  transition-colors duration-200
-                  hover:shadow-lg
-                '>
+                            w-full py-3 md:py-4
+                            bg-indigo-600 hover:bg-indigo-700
+                            text-white font-semibold
+                            text-base md:text-lg
+                            rounded-full mt-6 cursor-pointer
+                            transition-colors duration-200
+                            hover:shadow-lg
+                            '>
                             Proceed to Buy
                           </button>
                         </div>
@@ -293,36 +283,27 @@ const Cart = () => {
                   : (
                     // EMPTY CART STATE
                     <div className='
-          w-full 
-          min-h-[70vh]
-          flex flex-col 
-          items-center 
-          justify-center
-          gap-6
-          px-4
-        '>
+                          w-full min-h-[70vh]
+                          flex flex-col items-center 
+                          justify-center gap-6 px-4
+                          '>
                       <BsFillBagHeartFill className='text-rose-700 text-8xl' />
 
                       <p className='
-            text-white 
-            text-xl md:text-2xl lg:text-3xl
-            text-center
-            font-medium
-          '>
+                          text-white 
+                          text-xl md:text-2xl lg:text-3xl
+                          text-center font-medium
+                          '>
                         Nothing to show in your cart...
                       </p>
                       <button
                         onClick={() => navigate('/collections')}
                         className='
-              px-8 py-3
-              bg-rose-700
-              hover:bg-rose-600
-              text-white
-              font-semibold
-              rounded-full
-              transition-colors duration-200
-              mt-4
-            '>
+                        px-8 py-3 bg-rose-700 hover:bg-rose-600
+                        text-white font-semibold rounded-full
+                        transition-colors duration-200
+                        mt-4
+                        '>
                         Start Shopping
                       </button>
                     </div>

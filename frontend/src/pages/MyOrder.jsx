@@ -6,8 +6,6 @@ import Footer from '../components/Footer/Footer';
 import { Ring2 } from 'ldrs/react';
 import 'ldrs/react/Ring2.css';
 
-
-
 const MyOrder = () => {
 
     const [loading, setLoading] = useState(true);
@@ -44,10 +42,10 @@ const MyOrder = () => {
                         <div>
                             {/* BREADCRUMB */}
                             <div className='
-        w-full
-        px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 2xl:px-40
-        mt-6 md:mt-8
-    '>
+                                 w-full px-4 sm:px-6 md:px-8 
+                                 lg:px-12 xl:px-24 2xl:px-40
+                                 mt-6 md:mt-8
+                                 '>
                                 <p className='text-white text-sm md:text-base'>
                                     Home / <span className='text-(--color-primary)'>Orders</span>
                                 </p>
@@ -56,24 +54,21 @@ const MyOrder = () => {
                             {/* PAGE HEADER */}
                             <div className='my-3 md:my-5'>
                                 <h1 className="
-                        flex items-center justify-center 
-                        gap-2 md:gap-3
-                        text-3xl sm:text-4xl md:text-5xl lg:text-6xl
-                        font-semibold
-                        mb-3 md:mb-4
-                        text-white
-                        text-center
-                        px-4
-                        ">
+                                    flex items-center justify-center 
+                                    gap-2 md:gap-3
+                                    text-3xl sm:text-4xl md:text-5xl lg:text-6xl
+                                    font-semibold
+                                    mb-3 md:mb-4 text-white
+                                    text-center px-4
+                                    ">
                                     My <span className='text-rose-700'>Orders</span>
                                 </h1>
                                 <p className='
-                        text-white 
-                        text-base md:text-lg lg:text-xl
-                        text-center 
-                        tracking-wide
-                        px-4
-                        '>
+                                    text-white 
+                                    text-base md:text-lg lg:text-xl
+                                    text-center tracking-wide
+                                    px-4
+                                    '>
                                     Track and manage all your purchases in one place
                                 </p>
                             </div>

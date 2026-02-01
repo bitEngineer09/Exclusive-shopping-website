@@ -13,7 +13,6 @@ import { Ring2 } from 'ldrs/react'
 import 'ldrs/react/Ring2.css'
 
 
-
 const Collections = () => {
 
   // USE STATES
@@ -128,43 +127,35 @@ const Collections = () => {
                   {/* HEADING */}
                   <h1
                     className='
-                text-white
-                my-3 sm:my-5 xl:my-8
-                flex items-center
-                gap-2 md:gap-4
-                text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold
-                '>
+                    text-white my-3 sm:my-5 xl:my-8
+                    flex items-center gap-2 md:gap-4
+                    text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold
+                    '>
                     All Collections
                     <GiClothes className='text-rose-700' />
                   </h1>
 
                   {/* PRODUCTS GRID */}
                   <div className='
-                collections
-                w-full
-                grid 
-                grid-cols-2 
-                md:grid-cols-3 
-                lg:grid-cols-4 
-                xl:grid-cols-3 
-                2xl:grid-cols-4
-                gap-3 md:gap-4 lg:gap-5 xl:gap-6
-            '>
+                        collections w-full
+                        grid grid-cols-2 md:grid-cols-3 
+                        lg:grid-cols-4 xl:grid-cols-3 
+                        2xl:grid-cols-4
+                        gap-3 md:gap-4 lg:gap-5 xl:gap-6
+                        '>
                     {
                       filteredProducts?.map((product, index) => {
                         return (
                           <div
                             key={product._id || index}
                             className='
-                        bg-stone-900
-                        flex flex-col
-                        p-2 md:p-3 lg:p-4
-                        text-(--text-secondary)
-                        rounded-lg
-                        hover:shadow-lg hover:shadow-stone-800/50
-                        transition-all duration-300
-                      '
-                          >
+                            bg-stone-900
+                            flex flex-col
+                            p-2 md:p-3 lg:p-4
+                            text-(--text-secondary) rounded-lg
+                            hover:shadow-lg hover:shadow-stone-800/50
+                            transition-all duration-300
+                            '>
 
                             {/* PRODUCT IMAGE */}
                             <div className='relative w-full aspect-[3/4] overflow-hidden rounded-lg mb-3'>
@@ -173,13 +164,10 @@ const Collections = () => {
                                 src={product.image1}
                                 alt="productImage"
                                 className="
-                            w-full h-full
-                            object-cover
-                            cursor-pointer
-                            hover:scale-105
-                            transition-transform duration-300
-                          "
-                              />
+                                w-full h-full object-cover
+                                cursor-pointer hover:scale-105
+                                transition-transform duration-300
+                                "/>
                             </div>
 
                             {/* PRODUCT DETAILS */}
@@ -188,38 +176,31 @@ const Collections = () => {
                               <h3
                                 onClick={() => navigate(`/collections/${product._id}`)}
                                 className='
-                            text-zinc-100
-                            text-xs sm:text-sm md:text-base
-                            font-medium
-                            line-clamp-2
-                            h-10 md:h-12
-                            mb-2
-                            hover:text-rose-400
-                            transition-colors duration-200
-                            cursor-pointer
-                          '
-                              >
+                                text-zinc-100
+                                text-xs sm:text-sm md:text-base
+                                font-medium line-clamp-2
+                                h-10 md:h-12 mb-2
+                                hover:text-rose-400 transition-colors 
+                                duration-200 cursor-pointer
+                                '>
                                 {product.name}
                               </h3>
 
                               {/* PRODUCT DESCRIPTION */}
                               <p className='
-                            text-zinc-500
-                            text-xs md:text-sm
-                            line-clamp-2
-                            h-8 md:h-10
-                            mb-3
-                          '>
+                                  text-zinc-500 mb-3
+                                  text-xs md:text-sm
+                                  line-clamp-2 h-8 md:h-10
+                                  '>
                                 {product.description}
                               </p>
 
                               {/* CATEGORY & RATING */}
                               <div className='flex items-center justify-between mb-3'>
                                 <p className='
-                              text-zinc-400
-                              text-xs md:text-sm
-                              capitalize
-                            '>
+                                   text-zinc-400
+                                   text-xs md:text-sm capitalize
+                                   '>
                                   {product.category}
                                 </p>
                                 <div className='flex gap-0.5'>
@@ -235,15 +216,13 @@ const Collections = () => {
                               {/* BEST SELLER BADGE */}
                               {product.bestSeller && (
                                 <div className='
-                              text-xs md:text-sm
-                              bg-zinc-700
-                              text-zinc-100
-                              py-1.5 px-2
-                              mb-3
-                              rounded
-                              flex items-center justify-center
-                              gap-2
-                            '>
+                                      text-xs md:text-sm
+                                      bg-zinc-700
+                                      text-zinc-100
+                                      py-1.5 px-2 mb-3
+                                      flex items-center justify-center
+                                      rounded gap-2
+                                      '>
                                   Best Seller
                                   <MdVerified className='text-emerald-500' />
                                 </div>
@@ -277,20 +256,14 @@ const Collections = () => {
                                     }
                                   }}
                                   className='
-                              text-xs sm:text-sm
-                              py-2 md:py-2.5
-                              px-1 md:px-4
-                              bg-rose-800
-                              hover:bg-rose-700
-                              text-white
-                              font-medium 
-                              tracking-wide
-                              flex-1
-                              rounded-md
-                              transition-colors duration-200
-                              cursor-pointer
-                              text-nowrap
-                            '>
+                                  text-xs sm:text-sm
+                                  py-2 md:py-2.5 px-1 md:px-4
+                                  bg-rose-800 hover:bg-rose-700
+                                  text-white font-medium tracking-wide
+                                  flex-1 rounded-md
+                                  transition-colors duration-200
+                                  cursor-pointer text-nowrap
+                                  '>
                                   Add to Cart
                                 </button>
 
@@ -303,20 +276,17 @@ const Collections = () => {
                                     }
                                   }}
                                   className={`
-                              w-6 h-6 md:w-9 md:h-9
-                              flex-shrink-0
-                              hover:scale-110
-                              transition-all duration-200
-                              cursor-pointer
-                              ${wishListProductIds?.includes(product._id)
+                                  w-6 h-6 md:w-9 md:h-9
+                                  flex-shrink-0 hover:scale-110
+                                  transition-all duration-200 cursor-pointer
+                                  ${wishListProductIds?.includes(product._id)
                                       ? "text-rose-700"
                                       : "text-zinc-400 hover:text-rose-600"
                                     }
-                            `}
+                                  `}
                                 />
                               </div>
                             </div>
-
                           </div>
                         )
                       })
