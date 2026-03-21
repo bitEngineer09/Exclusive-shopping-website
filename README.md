@@ -34,9 +34,6 @@ Deployment:	Render (Server)
 
 
 🖼️ ScreenShots
-<img width="1917" height="997" alt="image" src="https://github.com/user-attachments/assets/638b900b-7dca-4afb-b475-b0ed18fa059a" /> </br>
-
-<img width="1919" height="996" alt="image" src="https://github.com/user-attachments/assets/7a73dfc3-d3bd-400a-a432-f58d59cc05c1" /> </br>
 
 <img width="1916" height="998" alt="Screenshot 2025-10-10 110519" src="https://github.com/user-attachments/assets/ad45f58e-6e89-44a4-bac0-9f210e81e87b" /> </br>
 
