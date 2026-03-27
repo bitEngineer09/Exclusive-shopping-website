@@ -76,7 +76,7 @@ const RecommendedProducts = ({ category, ID }) => {
                                         <div className='
                                             relative
                                             w-full
-                                            aspect-[3/4]
+                                            aspect-[4/4]
                                             overflow-hidden
                                     '>
                                             <img

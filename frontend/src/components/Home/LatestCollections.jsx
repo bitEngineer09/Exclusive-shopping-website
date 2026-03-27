@@ -78,13 +78,13 @@ const LatestCollections = () => {
                             collectionDiv
                             grid
                             grid-cols-2
-                            sm:grid-cols-2
-                            md:grid-cols-3
-                            lg:grid-cols-4
+                            sm:grid-cols-3
+                            md:grid-cols-4
+                            lg:grid-cols-5
                             gap-3 sm:gap-4 md:gap-5 lg:gap-6
                             ">
                             {
-                                products?.slice(-12)?.map((product) => {
+                                products?.slice(-15)?.map((product) => {
                                     return (
                                         <div
                                             onClick={() => navigate(`/collections/${product._id}`)}
@@ -100,12 +100,13 @@ const LatestCollections = () => {
                                                 transition-all duration-300
                                                 hover:scale-[1.02]
                                                 flex flex-col
-                                                '>
+                                                '
+                                        >
                                             {/* PRODUCT IMAGE */}
                                             <div className='
                                                 relative
                                                 w-full
-                                                aspect-[3/4]
+                                                aspect-[4/4]
                                                 overflow-hidden
                                                 '>
                                                 <img
@@ -118,7 +119,8 @@ const LatestCollections = () => {
                                                         object-cover
                                                         hover:scale-110
                                                         transition-transform duration-500
-                                                        '/>
+                                                        '
+                                                />
                                             </div>
 
                                             {/* PRODUCT DETAILS */}

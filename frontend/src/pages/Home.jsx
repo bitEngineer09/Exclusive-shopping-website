@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer';
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { useNavigate } from 'react-router-dom';
 import Banner from '../components/Home/Banner';
+import TextPressure from '../reactBits/TextPressure/TextPressure';
 
 const Home = () => {
 
@@ -19,7 +20,8 @@ const Home = () => {
       {/* MAIN CONTENT */}
       <div className='pb-12 md:pb-16 lg:pb-20'>
 
-        <Banner />
+        {/* <Banner /> */}
+        <TextPressure />
 
         {/* MODEL SLIDER */}
         <h2 className='
@@ -30,7 +32,7 @@ const Home = () => {
              mt-7 md:my-8 lg:my-15
              mb-3
           '>
-          Start <span className='text-rose-700'>Shopping </span>Now
+          {/* Start <span className='text-rose-700'>Shopping </span>Now */}
         </h2>
         <div className='relative'>
           <ModelSlider />
@@ -61,6 +63,10 @@ const Home = () => {
           <section className='mt-7 md:mt-16 lg:mt-20'>
             <LatestCollections navigate={navigate} />
           </section>
+
+          <div className='mt-10 lg:mt-20'>
+            <Banner />
+          </div>
 
         </div>
       </div>
