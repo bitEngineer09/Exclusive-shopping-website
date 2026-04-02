@@ -24,6 +24,8 @@ const Collections = () => {
   const [selectedSize, setSelectedSize] = useState([]);
   const [wishListProductIds, setWishListProductIds] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   // USE NAVIGATE
   const navigate = useNavigate();
@@ -89,6 +91,20 @@ const Collections = () => {
     setFilterdProducts(filtered);
   }, [selectedCategories, selectedSubCategories, sortBy, selectedSize, products]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategories, selectedSubCategories, sortBy, selectedSize]);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
 
   return (
 
@@ -144,7 +160,7 @@ const Collections = () => {
                         gap-3 md:gap-4 lg:gap-5 xl:gap-6
                         '>
                     {
-                      filteredProducts?.map((product, index) => {
+                      currentProducts?.map((product, index) => {
                         return (
                           <div
                             key={product._id || index}
@@ -289,8 +305,24 @@ const Collections = () => {
                             </div>
                           </div>
                         )
-                      })
-                    }
+                      })}
+                  </div>
+
+                  {/* Pagination */}
+                  <div className="flex justify-center mt-8 gap-2 flex-wrap">
+                    {[...Array(totalPages)].map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentPage(i + 1)}
+                        className={`
+                        px-3 py-1 rounded-md text-sm
+                        ${currentPage === i + 1
+                            ? "bg-rose-700 text-white"
+                            : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"}
+                        `}>
+                        {i + 1}
+                      </button>
+                    ))}
                   </div>
                 </div>
               </div>
