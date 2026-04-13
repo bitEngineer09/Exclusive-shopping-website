@@ -2,6 +2,7 @@ import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { User } from '../models/user.model.js'
 import { Session } from '../models/session.model.js';
+import mongoose from 'mongoose';
 
 export const registerUser = async (firstName, lastName, email, phone, dob, gender, encryptedPassword) => {
     return await User.create({ firstName, lastName, email, phone, dob, gender, password: encryptedPassword });
@@ -60,31 +61,34 @@ export const authenticate = async (req, res, loggedInUser, registeredUser) => {
     const { _id: id, firstName, lastName, email } = account;
     const name = firstName + " " + lastName;
 
+    
     const session = await createSession({
         ip: req.ClientIp,
         userAgent: req.headers["user-agent"],
         userId: id,
     })
 
+    const sessionId = session._id.toString();
+
     const accessToken = createAccessToken({
-        id,
+        id: id.toString(),
         name,
         email,
-        sessionId: session._id
+        sessionId,
     })
 
-    const refreshToken = createRefreshToken(session._id);
+    const refreshToken = createRefreshToken(sessionId);
 
     res.cookie("access_token", accessToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: "None",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
     });
 
     res.cookie("refresh_token", refreshToken, {
         httpOnly: true,
-        secure: true,
-        sameSite: "None",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
     });
 }
 //?--------------------------------------------------------------------
@@ -93,7 +97,12 @@ export const authenticate = async (req, res, loggedInUser, registeredUser) => {
 export const refreshTheTokens = async (refreshToken) => {
     try {
         const decodedToken = verifyToken(refreshToken);
-        if (!decodedToken) throw new Error("Invalid session")
+        console.log("DECODED REFRESH TOKEN:", JSON.stringify(decodedToken));
+        if (!decodedToken) throw new Error("Invalid session");
+
+        if (!mongoose.Types.ObjectId.isValid(decodedToken.sessionId)) {
+            throw new Error("Malformed session ID");
+        }
 
         const currentSession = await Session.findById(decodedToken.sessionId);
         if (!currentSession) throw new Error("Invalid session");
@@ -102,21 +111,21 @@ export const refreshTheTokens = async (refreshToken) => {
         if (!user) throw new Error("Invalid session");
 
         const userInfo = {
-            id: user._id,
+            id: user._id.toString(),
             name: user.firstName + " " + user.lastName,
             email: user.email,
-            sessionId: currentSession._id,
+            sessionId: currentSession._id.toString(),
         }
 
         const newAccessToken = createAccessToken(userInfo);
 
-        const newRefreshToken = createRefreshToken(currentSession._id);
+        const newRefreshToken = createRefreshToken(currentSession._id.toString());
 
         return { newAccessToken, newRefreshToken, user: userInfo };
 
     } catch (error) {
         console.log(`refresh the token method error:${error}`);
-        return res.status(400).json({ message: `refresh the token error: ${error}` });
+        throw error;
     }
 }
 

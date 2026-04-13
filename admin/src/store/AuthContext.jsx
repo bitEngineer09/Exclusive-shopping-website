@@ -9,11 +9,13 @@ const AuthContext = ({ children }) => {
 
     const [admin, setAdmin] = useState(null);
 
+    console.log(admin)
+
     // LOGIN CONTEXT
     const handleAdminLogin = async (email, password) => {
         try {
             const result = await adminLoginService(email, password);
-            console.log(result?.data?.user);
+            // console.log(result?.data?.user);
             setAdmin(result?.data?.user);
             return result?.data?.user;
 
@@ -32,6 +34,7 @@ const AuthContext = ({ children }) => {
         try {
             const result = await getAdminDataService();
             // console.log(result?.data);
+            // console.log(result)
             setAdmin(result?.data)
             return result;
 

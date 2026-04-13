@@ -56,7 +56,7 @@ const OrderContext = ({ children }) => {
         }
     }, [orderData]);
 
-    console.log(finalData);
+    // console.log(finalData);
     // console.log(orderData);
 
 
