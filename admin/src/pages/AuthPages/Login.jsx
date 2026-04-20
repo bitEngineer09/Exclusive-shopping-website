@@ -33,18 +33,19 @@ const Login = () => {
 
 
     return (
-        <div className=''>
+        <div className='bg-zinc-700 min-h-screen'>
             <Nav />
             <div className='w-full h-[calc(100%-6rem)] flex items-center justify-center mt-[3rem]'>
                 <div className="loginContainer w-[65rem] h-[70rem] p-[2rem] flex flex-col items-center">
                     <div className="header flex flex-col items-center justify-center">
                         <img src={adminLogo} alt="" className='w-[6rem]' />
-                        <p className='text-[3rem] font-medium '>Admin Dashboard
+                        <p className='text-[3rem] font-medium '>
+                            <span className='text-rose-600'>Admin</span> Dashboard
                         </p>
-                        <p className='text-[1.7rem] text-zinc-600'>Sign in to your account</p>
+                        <p className='text-[1.7rem] text-white'>Sign in to your account</p>
                     </div>
 
-                    <div className="formContainer w-full h-full rounded-[2rem] mt-[4rem] p-[2.5rem] bg-zinc-950 text-white">
+                    <div className="formContainer w-full h-full rounded-[2rem] mt-[4rem] p-[2.5rem] bg-zinc-900 text-white">
                         <h1 className='text-[2.7rem] mb-[3rem] text-center'>Welcome Back
                         </h1>
                         <div className='form w-full'>
@@ -124,4 +125,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Login;
