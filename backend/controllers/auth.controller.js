@@ -2,6 +2,8 @@ import { User } from "../models/user.model.js";
 import {
     authenticate,
     clearSession,
+    createAccessTokenAdmin,
+    createUserByEmail,
     findUserByEmail,
     findUserById,
     hashPassword,
@@ -15,7 +17,6 @@ import {
 export const register = async (req, res) => {
     try {
         const { firstName, lastName, email, phone, dob, gender, password } = req.body;
-        console.log("register body data:", req.body);
 
         // Basic check for required fields (you can expand this as needed)
         if (!firstName || !email || !phone || !dob || !gender || !password) {
@@ -168,11 +169,12 @@ export const editUser = async (req, res) => {
                 gender: updatedUser.gender,
                 email: updatedUser.email
             }
-        });
+        })
 
     } catch (error) {
         console.error(error.message);
         return res.status(400).json({ success: false, error: error.message });
     }
 }
+
 

@@ -1,40 +1,29 @@
 import { Product } from "../models/product.model.js";
 import { User } from "../models/user.model.js";
+import { addToCartService, clearParticularItemService, deleteCartItemService } from "../services/cart.services.js";
 
 // ADD ITEMS TO CART
 export const addToCart = async (req, res) => {
     try {
         if (!req.user) return res.status(400).json({ success: false, message: "User not found" });
 
+        console.log("req", req.user.id);
+        console.log("body", req.user);
+
         const { productId, quantity = 1, sizes, price } = req.body;
         // console.log(sizes);
         // console.log(price);
-        const product = await Product.findById(productId);
-        if (!product) return res.status(400).json({ success: false, message: "Product not found" });
 
-        const user = await User.findById(req.user.id);
+        const cart = await addToCartService(req.user.id, productId, quantity, sizes, price);
 
-        // now check if added item is already present in cart or not
-        // user ke cart me se fum find kar re hai
-        //? equals() MongoDB ka method hai jo ObjectId compare karta hai (string comparison se alag).
-        const isExists = user.cart.find(item => item.productId.equals(productId));
-
-        if (isExists) {
-            isExists.quantity += quantity;
-
-            isExists.sizes = Array.from(new Set([...isExists.sizes, ...sizes]));
-        } else {
-            user.cart.push({ productId, quantity, sizes, price });
-        }
-
-        await user.save();
-        await user.populate("cart.productId");
-
-        return res.status(200).json({ cart: user.cart });
+        return res.status(200).json({ success: true, cart });
 
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Server Error" });
+        console.error(error);
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
     }
 }
 
@@ -44,34 +33,15 @@ export const deleteCartItem = async (req, res) => {
     try {
         if (!req.user) return res.status(400).json({ success: false, message: "You are not authenticated" });
 
-        const { productId, quantity = 1 } = req.body;
+        const { productId } = req.body;
 
-        const product = await Product.findById(productId);
-        if (!product) return res.status(400).json({ success: false, message: "Product not found" });
+        const cart = await deleteCartItemService(productId, req.user.id,);
 
-        const user = await User.findById(req.user.id);
-        if (!user) return res.status(400).json({ success: false, message: "User not found" });
-
-        const itemIndex = user.cart.findIndex(item => item.productId.equals(product._id));
-
-        if (itemIndex === -1) {
-            return res.status(400).json({ success: false, message: "Product not in cart" });
-        }
-
-        if (user.cart[itemIndex].quantity > 1) {
-            user.cart[itemIndex].quantity -= 1;
-        } else {
-            user.cart.splice(itemIndex, 1);
-        }
-
-        await user.save();
-        await user.populate("cart.productId");
-
-        return res.status(200).json({ success: true, cart: user.cart });
+        return res.status(200).json({ success: true, cart });
 
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ success: false, message: error });
+        console.error(error);
+        return res.status(500).json({ success: false, message: error.message });
     }
 }
 
@@ -82,26 +52,14 @@ export const clearParticularItem = async (req, res) => {
 
         const { productId } = req.body;
 
-        const user = await User.findById(req.user.id);
-        if (!user) return res.status(400).json({ success: false, message: "User not found" })
-
-        const product = await Product.findById(productId);
-        if (!product) return res.status(400).json({ success: false, message: "Product not found" });
-
-        const itemIndex = user.cart.findIndex(item => item.productId.equals(product._id));
-        if (itemIndex === -1) return res.status(400).json({ success: false, message: "Product not in cart" });
-
-        user.cart.splice(itemIndex, 1);
-
-        await user.save();
-        await user.populate("cart.productId");
+        const cart = await clearParticularItemService(req.user.id, productId);
 
         return res.status(200).json(
             {
                 success: true,
                 message: "Product removed from cart",
-                cart: user.cart,
-                cartLenght: user.cart.length,
+                cart,
+                cartLenght: cart.length,
             })
 
     } catch (error) {
