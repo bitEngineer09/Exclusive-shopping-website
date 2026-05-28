@@ -254,7 +254,7 @@ const ItemDetails = ({
                         <button
                             onClick={() => {
                                 if (loggedinUserData) {
-                                    // console.log(selectedSize);
+                                    console.log(selectedSize);
                                     addItemsToCart(item._id, counter, selectedSize, item.price);
                                     navigate('/cart');
                                 } else {
