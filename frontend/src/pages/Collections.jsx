@@ -6,11 +6,11 @@ import { MdVerified } from "react-icons/md";
 import { IoStarSharp } from "react-icons/io5";
 import { GoHeartFill } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
-import { cartDataContext } from '../store/CartContext';
 import { GiClothes } from "react-icons/gi";
 import { authDataContext } from '../store/AuthContext';
 import { Ring2 } from 'ldrs/react'
 import 'ldrs/react/Ring2.css'
+import { toast } from 'react-toastify';
 
 
 const Collections = () => {
@@ -32,7 +32,6 @@ const Collections = () => {
 
   // CONTEXT DATA
   const { getAllProductsData, handleAddWishList, handleWishListData } = useContext(productDataContext);
-  const { addItemsToCart } = useContext(cartDataContext);
   const { loggedinUserData } = useContext(authDataContext);
 
 
@@ -260,13 +259,12 @@ const Collections = () => {
                                 </div>
                               </div>
 
-                              {/* ADD TO CART & WISHLIST */}
+                              {/* Buy Now & WISHLIST */}
                               <div className="flex items-center justify-between gap-3 mt-auto">
                                 <button
                                   onClick={() => {
                                     if (loggedinUserData) {
-                                      addItemsToCart(product._id, 1, ["M"], product.price);
-                                      navigate('/cart')
+                                      navigate(`/collections/${product._id}`)
                                     } else {
                                       navigate('/auth')
                                     }
@@ -280,13 +278,16 @@ const Collections = () => {
                                   transition-colors duration-200
                                   cursor-pointer text-nowrap
                                   '>
-                                  Add to Cart
+                                  Buy Now
                                 </button>
 
                                 <GoHeartFill
                                   onClick={() => {
                                     if (loggedinUserData) {
                                       handleAddWishList(product._id);
+                                      toast.success(wishListProductIds?.includes(product._id)
+                                        ? "Removed from Wishlist"
+                                        : "Added to Wishlist");
                                     } else {
                                       navigate('/auth')
                                     }

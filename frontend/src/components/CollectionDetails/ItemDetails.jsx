@@ -7,6 +7,7 @@ import { GoHeartFill } from "react-icons/go";
 import RatingStars from '../RatingStars';
 import { useNavigate } from 'react-router-dom';
 import { authDataContext } from '../../store/AuthContext';
+import { toast } from 'react-toastify';
 
 const ItemDetails = ({
     item,
@@ -40,7 +41,7 @@ const ItemDetails = ({
             }
         }
         fetchAllWishListData();
-    }, [])
+    }, [handleWishListData])
 
 
     const navigate = useNavigate();
@@ -81,12 +82,26 @@ const ItemDetails = ({
                         <MdOutlineCurrencyRupee />
                         {item.price}
                     </div>
+                    
+                    {/* WISHLIST */}
                     <GoHeartFill
                         onClick={() => {
+
                             if (loggedinUserData) {
+
+                                const isAlreadyInWishlist =
+                                    wishListProductIds?.includes(item._id);
+
                                 handleAddWishList(item._id);
+
+                                toast.success(
+                                    isAlreadyInWishlist
+                                        ? "Removed from Wishlist"
+                                        : "Added to Wishlist"
+                                );
+
                             } else {
-                                navigate('/auth')
+                                navigate('/auth');
                             }
                         }}
                         className={`
@@ -252,11 +267,35 @@ const ItemDetails = ({
                     {/* ADD TO CART */}
                     <div className='flex items-center gap-3'>
                         <button
-                            onClick={() => {
+                            onClick={async () => {
                                 if (loggedinUserData) {
-                                    console.log(selectedSize);
-                                    addItemsToCart(item._id, counter, selectedSize, item.price);
-                                    navigate('/cart');
+
+                                    if (selectedSize.length === 0) {
+                                        toast.error("Please select size");
+                                        return;
+                                    }
+
+                                    try {
+                                        await addItemsToCart(
+                                            item._id,
+                                            counter,
+                                            selectedSize,
+                                            item.price
+                                        );
+
+                                        // success toast
+                                        toast.success("Item added to cart");
+
+                                        navigate('/cart');
+
+                                    } catch (error) {
+
+                                        // error toast
+                                        toast.error(
+                                            error?.response?.data?.message || "Failed to add item"
+                                        );
+                                    }
+
                                 } else {
                                     navigate('/auth')
                                 }

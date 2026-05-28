@@ -5,7 +5,6 @@ import Register from './pages/Register';
 import { ToastContainer } from 'react-toastify';
 import About from './pages/About';
 import Collections from './pages/Collections';
-// import Product from './pages/Product';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import ContactPage from './pages/ContactPage';
 import CollectionDetails from './pages/CollectionDetails';
@@ -15,7 +14,6 @@ import Order from './pages/Order';
 import MyOrder from './pages/MyOrder';
 import Profile from './pages/Profile';
 import OrderSuccess from './pages/OrderSuccess'
-import Ai from './components/AI/Ai';
 
 
 const App = () => {
@@ -38,10 +36,11 @@ const App = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/order-success" element={<OrderSuccess />} />
          </Routes>
-         <Ai />
+
+         {/* Toast */}
          <ToastContainer
-            position="top-center"
-            autoclose={3000}
+            position="bottom-left"
+            autoClose={2000}
             theme="dark"
             toastClassName="bg-zinc-300 text-(--text-primary) text-lg shadow-xl"
             bodyClassName="font-medium"

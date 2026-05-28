@@ -6,7 +6,7 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { cartDataContext } from '../../store/CartContext';
-
+import { toast } from 'react-toastify';
 
 const CartItemsCards = ({ item, handleUpdateQuantity }) => {
 
@@ -223,7 +223,18 @@ const CartItemsCards = ({ item, handleUpdateQuantity }) => {
                 {/* DELETE BUTTON */}
                 <button
                     onClick={async () => {
-                        await removeItem(item.productId._id);
+                        try {
+                            await removeItem(item.productId._id);
+
+                            // success toast
+                            toast.success("Item deleted successfully");
+                        } catch (error) {
+
+                            // error tost
+                            toast.error(
+                                error?.response?.data?.message || "Failed to add item"
+                            );
+                        }
                     }}
                     className='
                 p-2
