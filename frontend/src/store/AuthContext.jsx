@@ -82,13 +82,9 @@ const AuthContext = ({ children }) => {
         const fetchCurrentLoggedinUserData = async () => {
             try {
                 const result = await handleLoggedInUser();
-                // console.log(result?.data?.user);
-                setLoggedinUserData(result?.data?.user);
+                setLoggedinUserData(result?.data?.user || null);
             } catch (error) {
-                return {
-                    success: false,
-                    error: error,
-                }
+                setLoggedinUserData(null);
             }
         }
         fetchCurrentLoggedinUserData();
@@ -96,8 +92,11 @@ const AuthContext = ({ children }) => {
 
 
     const value = {
+
         loggedinUserData, setLoggedinUserData,
+
         handleLogin, handleSignup, handleLogout, handleLoggedInUser,
+
         handleUpdateUserData
     }
 

@@ -1,6 +1,7 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getAllProducts } from '../services/adminProduct.services';
 import { addReview, addToWishList, getProductById, getWishListData } from '../services/product.services';
+import { authDataContext } from './AuthContext';
 
 
 export const productDataContext = createContext();
@@ -73,9 +74,15 @@ const ProductContext = ({ children }) => {
         }
     }
 
+    const { loggedinUserData } = useContext(authDataContext);
+
     useEffect(() => {
-        handleWishListData();
-    })
+        if (loggedinUserData) {
+            handleWishListData();
+        } else {
+            setWishlistData([]);
+        }
+    }, [loggedinUserData])
 
     // console.log(wishlistData);
 

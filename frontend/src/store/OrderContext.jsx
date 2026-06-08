@@ -37,18 +37,20 @@ const OrderContext = ({ children }) => {
         const fetchOrders = async (userId) => {
             try {
                 const response = await getOrders(userId);
-                // console.log(response?.data);
                 setOrderData(response?.data?.message);
                 return response;
             } catch (error) {
                 console.log(error);
-                return {
-                    success: false,
-                    message: error,
-                }
+                return { success: false, message: error }
             }
         }
-        fetchOrders(userId);
+
+        if (userId) {
+            fetchOrders(userId);
+        } else {
+            setOrderData([]);
+        }
+
     }, [userId]);
 
     // console.log(orderData)
