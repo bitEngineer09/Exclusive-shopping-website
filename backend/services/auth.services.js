@@ -117,8 +117,8 @@ export const refreshTheTokens = async (refreshToken) => {
         return { newAccessToken, newRefreshToken, user: userInfo };
 
     } catch (error) {
-        console.log(`refresh the token method error:${error}`);
-        return res.status(400).json({ message: `refresh the token error: ${error}` });
+        console.log(`refresh the token method error: ${error}`);
+        throw error;
     }
 }
 
