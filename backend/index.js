@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import cookieParser from "cookie-parser";
 import { connectToDb } from "./config/db.js";
 import express, { urlencoded } from "express";
@@ -9,8 +11,9 @@ import { productRouter } from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import orderRouter from "./routes/order.routes.js";
 
+
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 app.use(urlencoded({ extended: true }));
 app.use(express.json());
