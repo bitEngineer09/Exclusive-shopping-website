@@ -107,8 +107,14 @@ export const logout = async (req, res) => {
         if (!req.user) return res.status(400).json({ message: "User not authenticated" });
 
         await clearSession(req.user.sessionId);
-        res.clearCookie("access_token");
-        res.clearCookie("refresh_token");
+        const isProduction = process.env.NODE_ENV === "production";
+        const cookieOptions = {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+        };
+        res.clearCookie("access_token", cookieOptions);
+        res.clearCookie("refresh_token", cookieOptions);
 
         return res.status(200).json({ success: true, message: "User logged out" });
 

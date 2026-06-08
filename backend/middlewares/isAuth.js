@@ -30,11 +30,12 @@ export const isAuth = async (req, res, next) => {
                 req.user = user;
                 
 
+                const isProduction = process.env.NODE_ENV === "production";
                 const baseConfig = {
                     httpOnly: true,
-                    secure: process.env.NODE_ENV === "production",
-                    sameSite: "strict",
-                 };
+                    secure: isProduction,
+                    sameSite: isProduction ? "none" : "lax",
+                };
 
                 res.cookie("access_token", newAccessToken, {
                     ...baseConfig
