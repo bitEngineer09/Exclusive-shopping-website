@@ -23,21 +23,43 @@ const Wishlist = () => {
   // CONTEXT DATA
   const { handleWishListData } = useContext(productDataContext);
 
+  // useEffect(() => {
+  //   const fetchWishListData = async () => {
+  //     try {
+  //       setLoading(true);
+  //       const response = await handleWishListData();
+  //       setWishList(response.wishListData);
+  //       setLoading(false);
+  //       return response;
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetchWishListData();
+  // }, []);
+
   useEffect(() => {
     const fetchWishListData = async () => {
       try {
         setLoading(true);
         const response = await handleWishListData();
-        setWishList(response.wishListData);
-        setLoading(false);
-        return response;
+
+        // Guard: response may be undefined/error if API fails
+        if (response && response.wishListData) {
+          setWishList(response.wishListData);
+        } else {
+          setWishList([]);
+        }
       } catch (error) {
         console.log(error);
+        setWishList([]);
+      } finally {
+        setLoading(false); // ← always stop loading, even on error
       }
-    }
+    };
     fetchWishListData();
   }, []);
-
+  
   return (
     <div className='w-full min-h-screen bg-(--bg-color)'>
       <PrimaryNavbar />
