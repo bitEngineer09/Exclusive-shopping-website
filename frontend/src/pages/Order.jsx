@@ -14,7 +14,7 @@ const Order = () => {
   const navigate = useNavigate();
   
   const [method, setMethod] = useState("");
-  const [finalPrice, setFinalPrice] = useState(totalPrice + (totalPrice || 0) * 0.02);
+  const [finalPrice, setFinalPrice] = useState((totalPrice || 0) * 1.02);
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -133,7 +133,7 @@ const Order = () => {
           `${serverUrl}/api/order/razorpay`,
           {
             items: itemsToSend,
-            amount: Math.round(finalPrice * 100), // Paise mein convert
+            amount: Math.round(finalPrice), // Paise mein convert
             address: formData,
           },
           { withCredentials: true }
