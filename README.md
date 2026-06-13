@@ -17,7 +17,7 @@ A full-stack E-Commerce Platform built with the **MERN Stack** (MongoDB, Express
 - Cart management — add, update, remove items
 - Smooth checkout flow
 
-### 🔐 Authentication
+### Authentication
 - Secure user registration and login with **JWT**
 - Password hashing using **Argon2**
 - Protected routes for users and admins
@@ -29,7 +29,7 @@ A full-stack E-Commerce Platform built with the **MERN Stack** (MongoDB, Express
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
@@ -46,19 +46,11 @@ A full-stack E-Commerce Platform built with the **MERN Stack** (MongoDB, Express
 🖼️ ScreenShots
 <img width="1917" height="997" alt="image" src="https://github.com/user-attachments/assets/638b900b-7dca-4afb-b475-b0ed18fa059a" /> </br>
 
-<img width="1919" height="996" alt="image" src="https://github.com/user-attachments/assets/7a73dfc3-d3bd-400a-a432-f58d59cc05c1" /> </br>
-
 <img width="1916" height="998" alt="Screenshot 2025-10-10 110519" src="https://github.com/user-attachments/assets/ad45f58e-6e89-44a4-bac0-9f210e81e87b" /> </br>
-
-<img width="1919" height="998" alt="Screenshot 2025-10-10 110546" src="https://github.com/user-attachments/assets/805318f8-2f30-4a5e-b2b5-aefee3c55292" /> </br>
-
-<img width="1919" height="997" alt="Screenshot 2025-10-10 110610" src="https://github.com/user-attachments/assets/bafae36e-9203-4b38-9bb0-69c432f3f5a4" /> </br>
 
 <img width="1919" height="997" alt="Screenshot 2025-10-10 110630" src="https://github.com/user-attachments/assets/1303a6bb-27ce-4d77-8b34-c06c350b2d0c" /> </br>
 
 <img width="1919" height="997" alt="Screenshot 2025-10-10 110720" src="https://github.com/user-attachments/assets/2e20fb15-6175-4243-bbb1-1a8e565b20c9" /> </br>
-
-<img width="1919" height="996" alt="Screenshot 2025-10-10 110738" src="https://github.com/user-attachments/assets/26536fbe-d02e-470d-8136-a080c97e549b" /> </br>
 
 <img width="1919" height="997" alt="Screenshot 2025-10-10 110800" src="https://github.com/user-attachments/assets/0b2bb999-48b9-4ab2-b520-c1c10f10862a" /> </br>
 
