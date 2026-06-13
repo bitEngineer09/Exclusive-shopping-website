@@ -1,37 +1,47 @@
-🛍️ Exclusive Shopping Website
+# Exclusive Shopping Website
 
-An innovative Full Stack E-Commerce Platform built with the MERN Stack (MongoDB, Express.js, React.js, Node.js), featuring a Voice Navigation Bot for hands-free browsing. This project combines modern web technologies with an AI-driven user experience to create a next-generation online shopping environment.
+A full-stack E-Commerce Platform built with the **MERN Stack** (MongoDB, Express.js, React.js, Node.js), featuring secure authentication, dynamic product management, and a seamless shopping experience.
 
-🧠 Intelligent Voice Navigation
+## 🌐 Live Demo
 
-Integrated voice bot that allows users to navigate through different pages and sections using spoken commands.
-Commands like “Go to cart”, “Show products”, or “Open profile” make browsing smooth and futuristic.
+- **Frontend:** https://exclusive-shopping-website-frontend.onrender.com
+- **Backend:** https://exclusive-shopping-website-backend.onrender.com
 
-🛒 Shopping Features
+---
 
-Product Listing: Dynamic product cards with images, details, and price.
+## Features
 
-Search & Filter: Find products quickly based on category or keyword.
+### Shopping
+- Dynamic product listing with images, details, and pricing
+- Search & filter by category or keyword
+- Cart management — add, update, remove items
+- Smooth checkout flow
 
-Cart & Checkout: Add, remove, or update cart items seamlessly.
+### 🔐 Authentication
+- Secure user registration and login with **JWT**
+- Password hashing using **Argon2**
+- Protected routes for users and admins
 
-Authentication System: Secure user registration and login using JWT.
+### Admin Panel
+- Add, edit, and delete products
+- Manage orders and users
+- Upload product images via **Cloudinary**
 
+---
 
-💻 Tech Highlights
+## 🧰 Tech Stack
 
-Frontend: React.js with Context API for state management.
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React.js, Context API |
+| Backend | Node.js, Express.js |
+| Database | MongoDB, Mongoose |
+| Auth | JWT, Argon2 |
+| Image Storage | Cloudinary |
+| Payment | Razorpay |
+| Deployment | Render (Backend), Render (Frontend) |
 
-Backend: Node.js & Express.js for robust server handling.
-
-Database: MongoDB for scalable and flexible data storage.
-
-Deployment: Hosted using Render (backend) and Vercel (frontend).
-
-Authentication:	JWT, argon
-
-Deployment:	Render (Server) 
-
+---
 
 🖼️ ScreenShots
 <img width="1917" height="997" alt="image" src="https://github.com/user-attachments/assets/638b900b-7dca-4afb-b475-b0ed18fa059a" /> </br>
