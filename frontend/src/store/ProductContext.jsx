@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getAllProducts } from '../services/adminProduct.services';
-import { addReview, addToWishList, getProductById, getWishListData } from '../services/product.services';
+import { addReview, addToWishList, getAllProducts, getProductById, getWishListData } from '../services/product.services';
 import { authDataContext } from './AuthContext';
+import { serverURL } from '../config/serverURL';
 
 
 export const productDataContext = createContext();
@@ -15,10 +15,12 @@ const ProductContext = ({ children }) => {
     // GET ALL PRODUCTS DATA
     const getAllProductsData = async () => {
         try {
+            console.log("FETCHING FROM:", serverURL);
             const result = await getAllProducts();
+              console.log("RESPONSE:", result)
             return result.data;
         } catch (error) {
-            console.log(error);
+            console.log("GETALL ERROR:", error);
             return {
                 success: false,
                 message: error

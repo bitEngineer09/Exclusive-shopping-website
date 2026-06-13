@@ -40,6 +40,7 @@ const Collections = () => {
       try {
         setLoading(true);
         const result = await getAllProductsData();
+        // console.log(result);
         setProducts(result?.products);
         setLoading(false);
       } catch (error) {
@@ -60,7 +61,7 @@ const Collections = () => {
       }
     }
     fetchWishListData();
-  }, [wishListProductIds])
+  }, [])
 
 
 
@@ -97,12 +98,12 @@ const Collections = () => {
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
 
-  const currentProducts = filteredProducts.slice(
+  const currentProducts = filteredProducts?.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
 
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil((filteredProducts?.length || 0) / productsPerPage);
 
 
   return (

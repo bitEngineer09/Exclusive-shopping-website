@@ -5,7 +5,7 @@ import CartTotals from "../components/OrderPage/CartTotals";
 import { useLocation, useNavigate } from "react-router-dom";
 import { orderDataContext } from "../store/OrderContext";
 import axios from "axios";
-import { serverUrl } from "../config/serverUrl";
+import { serverURL } from "../config/serverURL";
 import FooterSecondary from '../components/Footer/FooterSecondary';
 
 const Order = () => {
@@ -130,7 +130,7 @@ const Order = () => {
         const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
         const { data } = await axios.post(
-          `${serverUrl}/api/order/razorpay`,
+          `${serverURL}/api/order/razorpay`,
           {
             items: itemsToSend,
             amount: Math.round(finalPrice), // Paise mein convert
@@ -150,7 +150,7 @@ const Order = () => {
             handler: async (response) => {
               try {
                 await axios.post(
-                  `${serverUrl}/api/order/verify`,
+                  `${serverURL}/api/order/verify`,
                   {
                     razorpay_order_id: response.razorpay_order_id,
                     razorpay_payment_id: response.razorpay_payment_id,

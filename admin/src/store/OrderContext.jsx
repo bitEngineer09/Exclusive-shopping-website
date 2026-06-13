@@ -1,6 +1,6 @@
 import React from 'react';
 import { createContext } from 'react';
-import { getAllOrdersAdmin, statusChange } from '../services/order.services';
+import { getAllOrdersAdmin, getAllCompletedOrders, statusChange } from '../services/order.services';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -10,31 +10,36 @@ const OrderContext = ({ children }) => {
 
     const [orderData, setOrderData] = useState([]);
     const [finalData, setFinalData] = useState([]);
+    const [completedOrders, setCompletedOrders] = useState([]);
+
+    // FETCH ACTIVE ORDERS
+    const fetchActiveOrders = async () => {
+        try {
+            const response = await getAllOrdersAdmin();
+            setOrderData(response?.data?.orders || []);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    // FETCH COMPLETED ORDERS
+    const fetchCompletedOrders = async () => {
+        try {
+            const response = await getAllCompletedOrders();
+            setCompletedOrders(response?.data?.orders || []);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     useEffect(() => {
-        const handleAdminOrders = async () => {
-            try {
-                const response = await getAllOrdersAdmin();
-                // console.log(response.data.orders);
-                setOrderData(response?.data?.orders);
-
-                return response?.data?.orders;
-
-            } catch (error) {
-                console.log(error.message);
-                return {
-                    success: false,
-                    message: error.message,
-                }
-            }
-        }
-        handleAdminOrders();
+        fetchActiveOrders();
+        fetchCompletedOrders();
     }, []);
 
 
-    // GET FINAL ORDER DATA
+    // GET FINAL ORDER DATA (active orders only)
     useEffect(() => {
-
         if (orderData && orderData.length > 0) {
             const allItems = orderData.flatMap(order => {
                 return order.items.map((item) => {
@@ -52,32 +57,28 @@ const OrderContext = ({ children }) => {
                 });
             });
             setFinalData(allItems);
-            // console.log(allItems);
+        } else {
+            setFinalData([]);
         }
     }, [orderData]);
-
-    console.log(finalData);
-    // console.log(orderData);
 
 
     const handleStatusChange = async (orderId, status) => {
         try {
-            console.log(status, orderId);
             const response = await statusChange(status, orderId);
-            console.log(response);
+            // Refresh both lists after any status change
+            await fetchActiveOrders();
+            await fetchCompletedOrders();
             return response;
         } catch (error) {
             console.log(error);
-            return {
-                success: false,
-                message: error,
-            }
+            return { success: false, message: error };
         }
     }
 
 
     const value = {
-        finalData, handleStatusChange
+        finalData, handleStatusChange, completedOrders
     };
 
     return (

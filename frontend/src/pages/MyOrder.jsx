@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PrimaryNavbar from '../components/nav/PrimaryNavbar';
 import { orderDataContext } from '../store/OrderContext';
+import { authDataContext } from '../store/AuthContext';
 import OrderItems from '../components/OrderPage/OrderItems';
 import Footer from '../components/Footer/Footer';
 import { Ring2 } from 'ldrs/react';
@@ -11,7 +12,15 @@ const MyOrder = () => {
     const [loading, setLoading] = useState(true);
 
     // CONTEXT DATA
-    const { orderData } = useContext(orderDataContext);
+    const { orderData, fetchOrders } = useContext(orderDataContext);
+    const { loggedinUserData } = useContext(authDataContext);
+
+    // Re-fetch every time this page is visited
+    useEffect(() => {
+        if (loggedinUserData?.id) {
+            fetchOrders(loggedinUserData.id);
+        }
+    }, []);
 
     useEffect(() => {
         if (orderData.length >= 0) {

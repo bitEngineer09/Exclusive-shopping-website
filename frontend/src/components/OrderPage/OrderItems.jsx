@@ -9,14 +9,27 @@ const OrderItems = ({ orderData }) => {
     const [totalItems, setTotalItems] = useState(0);
     const [totalOrders, setTotalOrders] = useState(0);
     const [totalSpent, setTotalSpent] = useState(0);
+    const [cancellingId, setCancellingId] = useState(null);
 
     
     // CONTEXT DATA
-    const { finalData } = useContext(orderDataContext);
+    const { finalData, cancelOrder } = useContext(orderDataContext);
     console.log(finalData)
 
     // USE NAVIGATE
     const navigate = useNavigate();
+
+     const handleCancel = async (orderId, status) => {
+        if (status === "shipped" || status === "delivered") return;
+        const confirmed = window.confirm("Are you sure you want to cancel this order? This cannot be undone.");
+        if (!confirmed) return;
+        setCancellingId(orderId);
+        const result = await cancelOrder(orderId);
+        if (!result?.success) {
+            alert(result?.message || "Failed to cancel order");
+        }
+        setCancellingId(null);
+    }
 
     useEffect(() => {
 
@@ -311,6 +324,27 @@ const OrderItems = ({ orderData }) => {
                                     '>
                                         Reorder
                                     </button>
+                                    
+                                    {/* CANCEL BUTTON — hidden once shipped/delivered */}
+                                    {itemDetails.status !== "shipped" && itemDetails.status !== "delivered" && (
+                                        <button
+                                            onClick={() => handleCancel(itemDetails.orderId, itemDetails.status)}
+                                            disabled={cancellingId === itemDetails.orderId}
+                                            className='
+                                                bg-red-700
+                                                hover:bg-red-800
+                                                disabled:opacity-50 disabled:cursor-not-allowed
+                                                px-5 py-2.5
+                                                text-sm md:text-base
+                                                rounded-full
+                                                transition-colors duration-200
+                                                font-medium
+                                                whitespace-nowrap
+                                                cursor-pointer
+                                            '>
+                                            {cancellingId === itemDetails.orderId ? "Cancelling..." : "Cancel Order"}
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>

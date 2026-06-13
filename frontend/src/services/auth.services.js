@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { serverUrl } from '../config/serverUrl';
+import { serverURL } from '../config/serverURL';
 
 
 // LOGIN SERVICES
 export const loginService = async (email, password) => {
     try {
-        const result = await axios.post(serverUrl + "/api/auth/login",
+        const result = await axios.post(serverURL + "/api/auth/login",
             { email, password },
             { withCredentials: true }
         );
@@ -23,7 +23,7 @@ export const loginService = async (email, password) => {
 // SIGNUP SERVICES
 export const signupService = async (firstName, lastName, email, phone, dob, gender, password) => {
     try {
-        const response = await axios.post(serverUrl + "/api/auth/register", {
+        const response = await axios.post(serverURL + "/api/auth/register", {
             firstName,
             lastName,
             email,
@@ -48,7 +48,7 @@ export const signupService = async (firstName, lastName, email, phone, dob, gend
 // LOGOUT SERVICES
 export const logoutService = async () => {
     try {
-        const response = await axios.post(serverUrl + "/api/auth/logout", {}, { withCredentials: true });
+        const response = await axios.post(serverURL + "/api/auth/logout", {}, { withCredentials: true });
         return response;
 
     } catch (error) {
@@ -63,7 +63,7 @@ export const logoutService = async () => {
 // GET CURRENT LOGGED IN USER DATA
 export const getCurrentLoggedInUserData = async () => {
     try {
-        const response = await axios.get(serverUrl + "/api/auth/getUserData", { withCredentials: true });
+        const response = await axios.get(serverURL + "/api/auth/getUserData", { withCredentials: true });
         return response;
 
     } catch (error) {
@@ -77,7 +77,7 @@ export const getCurrentLoggedInUserData = async () => {
 // EDIT USER SERVICES
 export const editUser = async (firstName, lastName, phone, dob, gender) => {
     try {
-        const response = await axios.patch(serverUrl + "/api/auth/edit",
+        const response = await axios.patch(serverURL + "/api/auth/edit",
             {
                 firstName,
                 lastName,

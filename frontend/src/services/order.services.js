@@ -1,4 +1,4 @@
-import { serverUrl } from "../config/serverUrl";
+import { serverURL } from "../config/serverURL";
 import axios from 'axios';
 
 
@@ -6,7 +6,7 @@ import axios from 'axios';
 export const placeOrder = async (orderData) => {
     try {
         const response = await axios.post(
-            serverUrl + '/api/order/placeorder',
+            serverURL + '/api/order/placeorder',
             orderData,
             { withCredentials: true }
         )
@@ -24,7 +24,7 @@ export const placeOrder = async (orderData) => {
 // PLACE ORDER WITH RAZORPAY
 export const placeOrderRazorpay = async (orderData) => {
     try {
-        const response = await axios.post(serverUrl +
+        const response = await axios.post(serverURL +
                 "/api/order/placeOrderRazorpay",
                 orderData,
                 {withCredentials: true}
@@ -44,10 +44,27 @@ export const placeOrderRazorpay = async (orderData) => {
 export const getOrders = async (userId) => {
     try {
         const response = await axios.get(
-            serverUrl + "/api/order/getAllOrder",
+            serverURL + "/api/order/getAllOrder",
             { params: { userId }, withCredentials: true });
         return response;
 
+    } catch (error) {
+        console.log(error);
+        return {
+            success: false,
+            message: error,
+        }
+    }
+}
+
+// CANCEL ORDER
+export const cancelOrderService = async (orderId) => {
+    try {
+        const response = await axios.delete(
+            serverURL + "/api/order/cancelOrder",
+            { data: { orderId }, withCredentials: true }
+        );
+        return response;
     } catch (error) {
         console.log(error);
         return {

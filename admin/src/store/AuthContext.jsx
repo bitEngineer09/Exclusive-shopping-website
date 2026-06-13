@@ -13,7 +13,6 @@ const AuthContext = ({ children }) => {
     const handleAdminLogin = async (email, password) => {
         try {
             const result = await adminLoginService(email, password);
-            console.log(result?.data?.user);
             setAdmin(result?.data?.user);
             return result?.data?.user;
 
@@ -31,12 +30,10 @@ const AuthContext = ({ children }) => {
     const getAdminData = async () => {
         try {
             const result = await getAdminDataService();
-            // console.log(result?.data);
-            setAdmin(result?.data)
+            setAdmin(result?.data?.user ?? null);
             return result;
 
         } catch (error) {
-
             console.log(error.message);
             return {
                 success: false,
@@ -49,8 +46,7 @@ const AuthContext = ({ children }) => {
     useEffect(() => {
         const fetchAdmin = async () => {
             try {
-                const result = await getAdminData();
-                setAdmin(result?.data?.user);
+                await getAdminData();
             } catch (error) {
                 setAdmin(null);
                 console.log("fetchAdmin error:", error)

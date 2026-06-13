@@ -1,11 +1,11 @@
 import axios from "axios";
-import { serverUrl } from "../config/serverUrl";
+import { serverURL } from "../config/serverURL";
 
 
 // GET CART ITEMS
 export const getCartItems = async () => {
     try {
-        const response = await axios.get(serverUrl + "/api/cart/get", { withCredentials: true });
+        const response = await axios.get(serverURL + "/api/cart/get", { withCredentials: true });
         return response.data;
     } catch (error) {
         return {
@@ -18,7 +18,7 @@ export const getCartItems = async () => {
 // ADD ITEM TO CART
 export const addCartItem = async (productId, quantity, sizes, price) => {
     try {
-        const response = await axios.post(serverUrl + "/api/cart/add",
+        const response = await axios.post(serverURL + "/api/cart/add",
             { productId, quantity, sizes, price },
             { withCredentials: true }
         )
@@ -35,7 +35,7 @@ export const addCartItem = async (productId, quantity, sizes, price) => {
 // DELETE CART ITEM
 export const deleteCartItem = async (productId, quantity) => {
     try {
-        const response = await axios.post(serverUrl + "/api/cart/delete",
+        const response = await axios.post(serverURL + "/api/cart/delete",
             { productId, quantity },
             { withCredentials: true }
         )
@@ -51,7 +51,7 @@ export const deleteCartItem = async (productId, quantity) => {
 // REMOVE A WHOLE PARTICULAR ITEM
 export const removeParticularCartItem = async (productId) => {
     try {
-        const response = await axios.post(serverUrl + "/api/cart/clearItem"
+        const response = await axios.post(serverURL + "/api/cart/clearItem"
             , { productId },
             { withCredentials: true }
         );

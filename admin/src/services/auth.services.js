@@ -1,5 +1,5 @@
-import { serverURL } from '../config/server.js';
 import axios from 'axios';
+import { serverURL } from '../config/server';
 
 
 // ADMIN LOGIN SERVICE

@@ -1,10 +1,10 @@
 import axios from "axios"
-import { serverUrl } from "../config/serverUrl"
+import { serverURL } from "../config/serverURL"
 
-// GET PRODUCT DATA BY ID
-export const getProductById = async (id) => {
+// GET ALL PRODUCTS
+export const getAllProducts = async () => {
     try {
-        const response = await axios.get(serverUrl + `/api/product/${id}`, { withCredentials: true });
+        const response = await axios.get(serverURL + "/api/product/getAll", { withCredentials: true });
         return response;
     } catch (error) {
         return {
@@ -14,11 +14,23 @@ export const getProductById = async (id) => {
     }
 }
 
+// GET PRODUCT DATA BY ID
+export const getProductById = async (id) => {
+    try {
+        const response = await axios.get(serverURL + `/api/product/${id}`, { withCredentials: true });
+        return response;
+    } catch (error) {
+        return {
+            success: false,
+            message: error,
+        }
+    }
+}
 
 // ADD TO WISHLIST
 export const addToWishList = async (productId) => {
     try {
-        const response = await axios.post(serverUrl + "/api/product/addToWishList",
+        const response = await axios.post(serverURL + "/api/product/addToWishList",
             { productId },
             { withCredentials: true }
         );
@@ -37,7 +49,7 @@ export const addToWishList = async (productId) => {
 // GET WISHLIST DATA
 export const getWishListData = async () => {
     try {
-        const response = await axios.get(serverUrl + "/api/product/getWishListData",
+        const response = await axios.get(serverURL + "/api/product/getWishListData",
             { withCredentials: true }
         );
         return response;
@@ -55,7 +67,7 @@ export const getWishListData = async () => {
 // ADD REVIEW
 export const addReview = async (rating, comment, productId) => {
     try {
-        const response = await axios.post(serverUrl + `/api/product/${productId}/review`,
+        const response = await axios.post(serverURL + `/api/product/${productId}/review`,
             {rating, comment},
             {withCredentials: true},
         );

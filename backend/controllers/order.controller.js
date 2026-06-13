@@ -2,6 +2,8 @@ import { Order } from "../models/order.model.js";
 import { User } from "../models/user.model.js";
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import AppError from "../utils/AppError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 // Razorpay instance
 const razorpay = new Razorpay({
@@ -10,137 +12,133 @@ const razorpay = new Razorpay({
 });
 
 // ---------------- COD ORDER ----------------
-export const placeOrder = async (req, res) => {
-    try {
-        const userId = req?.user?.id;
-        if (!userId) return res.status(400).json({ success: false, message: "You are not authenticated" });
+export const placeOrder = asyncHandler(async (req, res) => {
+    const userId = req?.user?.id;
+    if (!userId) throw new AppError("You are not authenticated", 401);
 
-        const { items, amount, address } = req.body;
+    const { items, amount, address } = req.body;
 
-        const newOrder = await Order.create({
-            userId,
-            items,
-            amount,
-            address,
-            paymentMethod: "COD",
-            payment: false,
-            date: Date.now(),
-        });
+    const newOrder = await Order.create({
+        userId,
+        items,
+        amount,
+        address,
+        paymentMethod: "COD",
+        payment: false,
+        date: Date.now(),
+    });
 
-        // Cart clear
-        await User.findByIdAndUpdate(userId, { cart: [] });
+    // Cart clear
+    await User.findByIdAndUpdate(userId, { cart: [] });
 
-        return res.status(200).json({ success: true, message: "Order placed", order: newOrder });
-    } catch (error) {
-        console.log(error);
-        return res.status(400).json({ success: false, message: "Order placing error", error });
-    }
-};
+    return res.status(200).json({ success: true, message: "Order placed", order: newOrder });
+})
 
 // ---------------- RAZORPAY ORDER ----------------
-export const placeOrderRazorpay = async (req, res) => {
-    try {
-        const { items, amount, address } = req.body;
-        const userId = req?.user?.id;
+export const placeOrderRazorpay = asyncHandler(async (req, res) => {
+    const { items, amount, address } = req.body;
+    const userId = req?.user?.id;
+    if (!userId) throw new AppError("You are not authenticated", 401);
 
-        const options = {
-            amount: Math.round(amount * 100), // paise me
-            currency: "INR",
-            receipt: "order_rcptid_" + Date.now(),
-        };
+    const options = {
+        amount: Math.round(amount * 100), // paise me
+        currency: "INR",
+        receipt: "order_rcptid_" + Date.now(),
+    };
 
-        const order = await razorpay.orders.create(options);
+    const order = await razorpay.orders.create(options);
 
-        const newOrder = await Order.create({
-            userId,
-            items,
-            amount,
-            address,
-            paymentMethod: "Razorpay",
-            payment: false,
-            razorpayOrderId: order.id,
-        });
+    const newOrder = await Order.create({
+        userId,
+        items,
+        amount,
+        address,
+        paymentMethod: "Razorpay",
+        payment: false,
+        razorpayOrderId: order.id,
+    });
 
-        res.status(200).json({ success: true, order, dbOrderId: newOrder._id });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Failed to place Razorpay order" });
-    }
-};
+    res.status(200).json({ success: true, order, dbOrderId: newOrder._id });
+})
 
 // ---------------- VERIFY RAZORPAY PAYMENT ----------------
-export const verifyPayment = async (req, res) => {
-    try {
-        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
+export const verifyPayment = asyncHandler(async (req, res) => {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, orderId } = req.body;
 
-        const body = razorpay_order_id + "|" + razorpay_payment_id;
-        const expectedSignature = crypto
-            .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-            .update(body.toString())
-            .digest("hex");
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
+    const expectedSignature = crypto
+        .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+        .update(body.toString())
+        .digest("hex");
 
-        if (expectedSignature === razorpay_signature) {
-            const updatedOrder = await Order.findByIdAndUpdate(
-                orderId,
-                {
-                    payment: true,
-                    razorpayPaymentId: razorpay_payment_id,
-                    razorpaySignature: razorpay_signature,
-                    status: "processing",
-                },
-                { new: true }
-            );
+    if (expectedSignature === razorpay_signature) {
+        const updatedOrder = await Order.findByIdAndUpdate(
+            orderId,
+            {
+                payment: true,
+                razorpayPaymentId: razorpay_payment_id,
+                razorpaySignature: razorpay_signature,
+                status: "processing",
+            },
+            { new: true }
+        );
 
-            // Cart clear after successful payment
-            await User.findByIdAndUpdate(updatedOrder.userId, { cart: [] });
+        // Cart clear after successful payment
+        await User.findByIdAndUpdate(updatedOrder.userId, { cart: [] });
 
-            res.status(200).json({ success: true, message: "Payment verified successfully", order: updatedOrder });
-        } else {
-            res.status(400).json({ success: false, message: "Payment verification failed" });
-        }
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Error verifying payment" });
+        res.status(200).json({ success: true, message: "Payment verified successfully", order: updatedOrder });
+    } else {
+        throw new AppError("Payment verification failed", 400);
     }
-};
+})
 
 // ---------------- FETCH USER ORDERS ----------------
-export const getAllOrder = async (req, res) => {
-    try {
-        if (!req.user) return res.status(400).json({ success: false, message: "You are not authenticated" });
+export const getAllOrder = asyncHandler(async (req, res) => {
+    if (!req.user) throw new AppError("You are not authenticated", 401);
 
-        const { userId } = req.query;
-        const orders = await Order.find({ userId }).populate("items.productId");
-        if (!orders) return res.status(400).json({ success: false, message: "No order found" });
+    const { userId } = req.query;
+    const orders = await Order.find({ userId }).populate("items.productId");
+    if (!orders) throw new AppError("No order found", 400);
 
-        return res.status(200).json({ success: true, message: orders });
-    } catch (error) {
-        console.log(error);
-        return res.status(400).json({ success: false, message: error });
-    }
-};
+    return res.status(200).json({ success: true, message: orders });
+})
 
 // ---------------- ADMIN ORDERS ----------------
-export const getAllOrderAdmin = async (req, res) => {
-    try {
-        const adminOrders = await Order.find({}).populate("items.productId");
-        if (!adminOrders) return res.status(400).json({ success: false, message: "Internal server error" });
+export const getAllOrderAdmin = asyncHandler(async (req, res) => {
+    const adminOrders = await Order.find({ status: { $ne: "delivered" } }).populate("items.productId");
+    if (!adminOrders) throw new AppError("Internal server error", 400);
 
-        return res.status(200).json({ success: true, orders: adminOrders });
-    } catch (error) {
-        console.log(error.message);
-        return res.status(400).json({ success: false, message: error.message });
-    }
-};
+    return res.status(200).json({ success: true, orders: adminOrders });
+})
 
 // ---------------- UPDATE ORDER STATUS ----------------
-export const updateStatus = async (req, res) => {
-    try {
-        const { orderId, status } = req.body;
-        await Order.findByIdAndUpdate(orderId, { status });
-        return res.status(200).json({ success: true, message: "Status updated" });
-    } catch (error) {
-        console.log(error.message);
-        return res.status(400).json({ success: false, message: error.message });
+export const updateStatus = asyncHandler(async (req, res) => {
+    const { orderId, status } = req.body;
+    await Order.findByIdAndUpdate(orderId, { status });
+    return res.status(200).json({ success: true, message: "Status updated" });
+})
+
+// ---------------- CANCEL ORDER (USER) ----------------
+export const cancelOrder = asyncHandler(async (req, res) => {
+    const userId = req?.user?.id;
+    if (!userId) throw new AppError("You are not authenticated", 401);
+
+    const { orderId } = req.body;
+    const order = await Order.findOne({ _id: orderId, userId });
+
+    if (!order) throw new AppError("Order not found", 404);
+
+    // Cannot cancel if already shipped or delivered
+    if (order.status === "shipped" || order.status === "delivered") {
+        throw new AppError("Order cannot be cancelled after it has been shipped", 400);
     }
-};
+
+    await Order.findByIdAndDelete(orderId);
+    return res.status(200).json({ success: true, message: "Order cancelled and removed" });
+})
+
+// ---------------- COMPLETED ORDERS (ADMIN) ----------------
+export const getCompletedOrders = asyncHandler(async (req, res) => {
+    const completedOrders = await Order.find({ status: "delivered" }).populate("items.productId");
+    return res.status(200).json({ success: true, orders: completedOrders });
+})

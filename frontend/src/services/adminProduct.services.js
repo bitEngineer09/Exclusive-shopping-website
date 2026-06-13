@@ -1,5 +1,5 @@
-import { serverURL } from "../../../admin/src/config/server";
 import axios from 'axios';
+import { serverURL } from '../config/serverURL';
 
 // ADD PRODUCT SERVICE
 export const addProduct = async (formData) => {
@@ -16,17 +16,17 @@ export const addProduct = async (formData) => {
             message: error,
         }
     }
-} 
+}
 
 
 // GET ALL PRODUCTS
 export const getAllProducts = async () => {
     try {
-        const response = await axios.get(serverURL + "/api/product/getAll", {withCredentials: true});
+        const response = await axios.get(serverURL + "/api/product/getAll", { withCredentials: true });
         return response;
     } catch (error) {
         return {
-            success: false, 
+            success: false,
             message: error,
         }
     }
@@ -36,15 +36,12 @@ export const getAllProducts = async () => {
 // DELETE PRODUCT BY ID
 export const deleteProduct = async (id) => {
     try {
-        const response = await axios.delete(serverURL + `/api/product/delete/${id}`, {}, {withCredentials: true});
+        const response = await axios.delete(serverURL + `/api/product/delete/${id}`, { withCredentials: true });
         return response;
     } catch (error) {
         return {
-            success: false, 
+            success: false,
             message: error,
-        }        
+        }
     }
 }
-
-
-

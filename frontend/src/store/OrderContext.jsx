@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { getOrders, placeOrder } from '../services/order.services';
+import { getOrders, placeOrder, cancelOrderService } from '../services/order.services';
 import { authDataContext } from './AuthContext';
 
 export const orderDataContext = createContext();
@@ -13,14 +13,26 @@ const OrderContext = ({ children }) => {
     // CONTEXT DATA
     const { loggedinUserData } = useContext(authDataContext);
     const userId = loggedinUserData?.id;
-    // console.log(userId)
+
+    // FETCH ORDERS
+    const fetchOrders = async (uid) => {
+        try {
+            const response = await getOrders(uid);
+            setOrderData(response?.data?.message);
+            return response;
+        } catch (error) {
+            console.log(error);
+            return { success: false, message: error }
+        }
+    }
 
     // PLACE ORDER
     const order = async (orderData) => {
         try {
-            console.log(orderData)
             const response = await placeOrder(orderData);
-            // console.log(response.data);
+            if (response?.data?.success) {
+                await fetchOrders(userId);
+            }
             return response.data;
         } catch (error) {
             console.log(error);
@@ -31,29 +43,31 @@ const OrderContext = ({ children }) => {
         }
     }
 
+    // CANCEL ORDER
+    const cancelOrder = async (orderId) => {
+        try {
+            const response = await cancelOrderService(orderId);
+            if (response?.data?.success) {
+                // Refresh orders after cancellation
+                await fetchOrders(userId);
+            }
+            return response?.data;
+        } catch (error) {
+            console.log(error);
+            return { success: false, message: error }
+        }
+    }
+
 
     // GET ALL ORDERS
     useEffect(() => {
-        const fetchOrders = async (userId) => {
-            try {
-                const response = await getOrders(userId);
-                setOrderData(response?.data?.message);
-                return response;
-            } catch (error) {
-                console.log(error);
-                return { success: false, message: error }
-            }
-        }
-
         if (userId) {
             fetchOrders(userId);
         } else {
             setOrderData([]);
         }
-
     }, [userId]);
 
-    // console.log(orderData)
 
     // GETTING FINAL DATA
     useEffect(() => {
@@ -71,6 +85,8 @@ const OrderContext = ({ children }) => {
                 });
 
                 setFinalData(allItems);
+            } else {
+                setFinalData([]);
             }
         };
 
@@ -80,10 +96,9 @@ const OrderContext = ({ children }) => {
             console.log("Error processing order data:", error);
         }
     }, [orderData]);
-    // console.log("FINAL DATA:", finalData);
 
     const value = {
-        order, orderData, finalData
+        order, orderData, finalData, cancelOrder, fetchOrders
     }
 
     return (

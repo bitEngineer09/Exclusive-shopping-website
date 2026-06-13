@@ -1,19 +1,25 @@
 import axios from "axios";
 import { serverURL } from "../config/server";
 
-// FETCH ALL ORDERS
+// FETCH ALL ACTIVE ORDERS (excludes delivered)
 export const getAllOrdersAdmin = async () => {
     try {
         const response = await axios.get(serverURL + "/api/order/getAdminOrder", { withCredentials: true });
-
         return response;
-
     } catch (error) {
         console.log(error);
-        return {
-            success: false,
-            message: error,
-        }
+        return { success: false, message: error };
+    }
+}
+
+// FETCH COMPLETED (DELIVERED) ORDERS
+export const getAllCompletedOrders = async () => {
+    try {
+        const response = await axios.get(serverURL + "/api/order/getCompletedOrders", { withCredentials: true });
+        return response;
+    } catch (error) {
+        console.log(error);
+        return { success: false, message: error };
     }
 }
 
